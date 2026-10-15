@@ -8,7 +8,7 @@ const t = useT(getLocale(Astro.currentLocale));
     {
       t.milestones.items.map((m) => (
         <li class:list={{ done: m.done }}>
-          <time datetime={m.datetime}>{m.when}</time>
+          <span class="stage">{m.stage}</span>
           <span>
             <Fragment set:html={m.text} />
             {m.done && ' '}
@@ -23,8 +23,8 @@ const t = useT(getLocale(Astro.currentLocale));
 <style>
   ol { display: grid; gap: 10px; }
   li { display: grid; grid-template-columns: 104px 1fr; gap: 12px; background: var(--color-surface-card); border-radius: 14px; padding: 14px 16px; }
-  time { font: 500 13px/1.9 var(--font-mono); color: var(--color-text-secondary); }
-  .done time, .check { color: var(--color-brand-300); }
+  .stage { font: 500 13px/1.9 var(--font-mono); color: var(--color-text-secondary); }
+  .done .stage, .check { color: var(--color-brand-300); }
   .check { font-weight: 700; }
   @media (min-width: 800px) {
     ol { grid-template-columns: 1fr 1fr; }

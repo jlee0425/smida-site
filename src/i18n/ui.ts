@@ -8,7 +8,7 @@ export const localeNames: Record<Locale, string> = { en: 'EN', ja: '日本語', 
 export const ogLocale: Record<Locale, string> = { en: 'en_US', ja: 'ja_JP', ko: 'ko_KR' };
 
 type Item = { title: string; body: string };
-type Milestone = { when: string; datetime: string; text: string; done?: boolean };
+type Milestone = { stage: string; text: string; done?: boolean };
 
 export interface Dict {
   a11y: { main: string; footer: string; language: string; done: string; getInvolved: string; ogAlt: string };
@@ -67,11 +67,11 @@ const en: Dict = {
   milestones: {
     heading: 'Milestones',
     items: [
-      { when: 'Oct 2026', datetime: '2026-10', text: 'Built and tested every day at a Tokyo box', done: true },
-      { when: 'Late 2026', datetime: '2026', text: 'The Smida beta with our box (iPhone &amp; Android)' },
-      { when: 'Early 2027', datetime: '2027', text: 'Launch in Japan' },
-      { when: '2027', datetime: '2027', text: 'Train together: share results, follow your box' },
-      { when: '2027', datetime: '2027', text: 'Korea, then more' },
+      { stage: 'Now', text: 'Built and tested every day at a Tokyo box', done: true },
+      { stage: 'Next', text: 'The Smida beta with our box (iPhone &amp; Android)' },
+      { stage: 'Later', text: 'Launch in Japan' },
+      { stage: 'Later', text: 'Train together: share results, follow your box' },
+      { stage: 'Later', text: 'Korea, then more' },
     ],
   },
   features: {
@@ -96,13 +96,13 @@ const en: Dict = {
     name: 'The name',
     nameBody: "<em>Smida</em> is Swedish for <em>to forge</em>: heat, hammer, repeat. That's training.",
     next: "Where we're going",
-    nextBody: 'In 2027, Smida becomes a place to train together: share your results, follow your box, and see how you stack up on benchmark boards. It starts in Japan, then Korea, then more.',
+    nextBody: 'Next, Smida becomes a place to train together: share your results, follow your box, and see how you stack up on benchmark boards. It starts in Japan, then Korea, then more.',
   },
   support: {
     heading: 'Support',
     faq: [
       { q: 'What is Smida?', a: "A training log for functional fitness and hybrid racing: timers, benchmarks and PRs. It's built and tested every day at a box in Tokyo." },
-      { q: 'How do I join the beta?', a: 'Email <a href="mailto:hello@smida.fit?subject=Smida%20beta">hello@smida.fit</a> and tell us whether you use iPhone or Android. The beta starts with our box in late 2026.' },
+      { q: 'How do I join the beta?', a: 'Email <a href="mailto:hello@smida.fit?subject=Smida%20beta">hello@smida.fit</a> and tell us whether you use iPhone or Android. The beta starts with our box.' },
       { q: 'Where is my data?', a: 'On your device. Smida has no account and no server, so the developer never sees your training data.' },
       { q: 'How do I back up or move my data?', a: 'Export a backup file from the app and save it wherever you like, for example your own cloud drive. Import that file on your new phone.' },
     ],
@@ -152,11 +152,11 @@ const ja: Dict = {
   milestones: {
     heading: 'ロードマップ',
     items: [
-      { when: '2026年10月', datetime: '2026-10', text: '東京のボックスで毎日開発・テスト中', done: true },
-      { when: '2026年後半', datetime: '2026', text: '私たちのボックスで Smida ベータ版を開始（iPhone・Android）' },
-      { when: '2027年前半', datetime: '2027', text: '日本でリリース' },
-      { when: '2027年', datetime: '2027', text: '一緒にトレーニング：記録をシェアし、ボックスをフォロー' },
-      { when: '2027年', datetime: '2027', text: '韓国、そしてその先へ' },
+      { stage: 'いま', text: '東京のボックスで毎日開発・テスト中', done: true },
+      { stage: '次に', text: '私たちのボックスで Smida ベータ版を開始（iPhone・Android）' },
+      { stage: 'その先', text: '日本でリリース' },
+      { stage: 'その先', text: '一緒にトレーニング：記録をシェアし、ボックスをフォロー' },
+      { stage: 'その先', text: '韓国、そしてその先へ' },
     ],
   },
   features: {
@@ -181,13 +181,13 @@ const ja: Dict = {
     name: '名前の由来',
     nameBody: '<em>smida</em> はスウェーデン語で「<em>鍛える</em>」という意味。熱して、打って、また繰り返す。トレーニングも同じです。',
     next: 'これから',
-    nextBody: '2027年、Smida は仲間と一緒にトレーニングできる場所になります。記録をシェアしたり、ボックスをフォローしたり、ベンチマークボードで自分の位置を確かめたり。まずは日本、次に韓国、そしてその先へ。',
+    nextBody: '次のステップとして、Smida は仲間と一緒にトレーニングできる場所になります。記録をシェアしたり、ボックスをフォローしたり、ベンチマークボードで自分の位置を確かめたり。まずは日本、次に韓国、そしてその先へ。',
   },
   support: {
     heading: 'サポート',
     faq: [
       { q: 'Smida とは何ですか？', a: 'ファンクショナルフィットネスとハイブリッドレースのためのトレーニング記録アプリです。タイマー、ベンチマーク、自己ベストの記録ができます。東京のボックスで、毎日開発・テストしています。' },
-      { q: 'ベータ版に参加するには？', a: '<a href="mailto:hello@smida.fit?subject=Smida%20beta">hello@smida.fit</a> まで、お使いの端末が iPhone か Android かを書いてメールしてください。ベータ版は 2026 年後半、私たちのボックスから始まります。' },
+      { q: 'ベータ版に参加するには？', a: '<a href="mailto:hello@smida.fit?subject=Smida%20beta">hello@smida.fit</a> まで、お使いの端末が iPhone か Android かを書いてメールしてください。ベータ版は、私たちのボックスから始まります。' },
       { q: 'データはどこに保存されますか？', a: 'お使いの端末の中です。アカウントもサーバーもないため、開発者があなたのトレーニングデータを見ることはありません。' },
       { q: 'バックアップや機種変更の方法は？', a: 'アプリからバックアップファイルを書き出し、お好きな場所（ご自身のクラウドドライブなど）に保存してください。新しい端末でそのファイルを読み込めば復元できます。' },
     ],
@@ -237,11 +237,11 @@ const ko: Dict = {
   milestones: {
     heading: '로드맵',
     items: [
-      { when: '2026년 10월', datetime: '2026-10', text: '도쿄의 한 박스에서 매일 개발하고 테스트하는 중', done: true },
-      { when: '2026년 하반기', datetime: '2026', text: '우리 박스에서 Smida 베타 시작(iPhone·Android)' },
-      { when: '2027년 상반기', datetime: '2027', text: '일본 출시' },
-      { when: '2027년', datetime: '2027', text: '함께 운동하기: 기록 공유, 내 박스 팔로우' },
-      { when: '2027년', datetime: '2027', text: '한국, 그리고 더 많은 곳으로' },
+      { stage: '지금', text: '도쿄의 한 박스에서 매일 개발하고 테스트하는 중', done: true },
+      { stage: '다음', text: '우리 박스에서 Smida 베타 시작(iPhone·Android)' },
+      { stage: '이후', text: '일본 출시' },
+      { stage: '이후', text: '함께 운동하기: 기록 공유, 내 박스 팔로우' },
+      { stage: '이후', text: '한국, 그리고 더 많은 곳으로' },
     ],
   },
   features: {
@@ -266,13 +266,13 @@ const ko: Dict = {
     name: '이름의 뜻',
     nameBody: '<em>smida</em>는 스웨덴어로 ‘<em>단련하다</em>’라는 뜻입니다. 달구고, 두드리고, 다시 반복하는 것. 훈련도 마찬가지입니다.',
     next: '앞으로의 계획',
-    nextBody: '2027년, Smida는 함께 운동하는 공간이 됩니다. 기록을 공유하고, 내 박스를 팔로우하고, 벤치마크 보드에서 내 위치를 확인할 수 있게 됩니다. 일본을 시작으로 한국, 그리고 더 많은 곳으로 넓혀 갈 예정입니다.',
+    nextBody: '다음으로 Smida는 함께 운동하는 공간이 될 준비를 하고 있습니다. 기록을 공유하고, 내 박스를 팔로우하고, 벤치마크 보드에서 내 위치를 확인할 수 있게 됩니다. 일본을 시작으로 한국, 그리고 더 많은 곳으로 넓혀 갈 예정입니다.',
   },
   support: {
     heading: '고객 지원',
     faq: [
       { q: 'Smida는 어떤 앱인가요?', a: '기능성 피트니스와 하이브리드 레이스를 위한 운동 기록 앱입니다. 타이머와 벤치마크, 개인 최고 기록(PR) 관리를 지원합니다. 도쿄의 한 박스에서 매일 개발하고 테스트하고 있습니다.' },
-      { q: '베타에 참여하려면 어떻게 하나요?', a: '<a href="mailto:hello@smida.fit?subject=Smida%20beta">hello@smida.fit</a>으로 사용 중인 기기(iPhone 또는 Android)를 적어 메일을 보내 주세요. 베타는 2026년 하반기에 우리 박스에서 먼저 시작합니다.' },
+      { q: '베타에 참여하려면 어떻게 하나요?', a: '<a href="mailto:hello@smida.fit?subject=Smida%20beta">hello@smida.fit</a>으로 사용 중인 기기(iPhone 또는 Android)를 적어 메일을 보내 주세요. 베타는 우리 박스에서 먼저 시작합니다.' },
       { q: '내 데이터는 어디에 저장되나요?', a: '사용 중인 기기 안에 저장됩니다. Smida에는 계정도 서버도 없기 때문에 개발자가 여러분의 운동 데이터를 볼 수 없습니다.' },
       { q: '데이터를 백업하거나 옮기려면 어떻게 하나요?', a: '앱에서 백업 파일을 내보내 원하는 곳(예: 본인의 클라우드 드라이브)에 저장하세요. 새 휴대폰에서 그 파일을 불러오면 복원됩니다.' },
     ],
