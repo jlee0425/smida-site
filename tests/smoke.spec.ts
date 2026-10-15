@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { locales, pages } from '../src/i18n/ui';
+import { locales, pages, screens } from '../src/i18n/ui';
 import { pathFor } from '../src/i18n/utils';
 
 for (const page of pages) {
@@ -28,6 +28,44 @@ for (const page of pages) {
     });
   }
 }
+
+for (const locale of locales) {
+  test(`home: the phone shows this locale's real screens and the chips swap them (${locale})`, async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem('smida-lang', 'en'));
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(pathFor(locale, ''));
+    const shots = page.locator('.dev picture');
+    await expect(shots).toHaveCount(screens.length);
+    for (const src of await page.locator('.dev img').evaluateAll((imgs) => imgs.map((i) => i.getAttribute('src')))) {
+      expect(src).toContain(`.${locale}.`);
+    }
+    await expect(page.locator('.dev picture.on')).toHaveAttribute('data-key', 'home');
+    await page.locator('.pchips button[data-key=prbook]').click();
+    await expect(page.locator('.dev picture.on')).toHaveAttribute('data-key', 'prbook');
+    await expect(page.locator('.pchips button[data-key=prbook]')).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('.dev picture.on img')).toBeVisible();
+  });
+}
+
+test('home: the beta CTA is a mailto and nothing collects an email address', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('form, input')).toHaveCount(0);
+  const ctas = page.locator('main a.btn');
+  await expect(ctas).toHaveCount(2);
+  for (const href of await ctas.evaluateAll((as) => as.map((a) => a.getAttribute('href')))) {
+    expect(href).toBe('mailto:hello@smida.fit?subject=Smida%20beta');
+  }
+});
+
+test('home (desktop): scrolling the feature blocks swaps the screen', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  for (const key of ['timer', 'quick-log', 'prbook', 'open']) {
+    await page.locator(`.fb[data-key=${key}]`).evaluate((el) => el.scrollIntoView({ block: 'center' }));
+    await expect(page.locator('.dev picture.on')).toHaveAttribute('data-key', key);
+    await expect(page.locator(`.fb[data-key=${key}]`)).toHaveClass(/\bon\b/);
+  }
+});
 
 test.describe('language landing on /', () => {
   test.use({ locale: 'ja-JP' });

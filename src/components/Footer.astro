@@ -1,12 +1,18 @@
 ---
 import { getLocale, pathFor, useT } from '../i18n/utils';
+import icon from '../assets/brand/s-icon.svg?url';
 const locale = getLocale(Astro.currentLocale);
 const t = useT(locale);
 ---
-<footer class="mt-6 border-t border-border-subtle pt-6 pb-10 text-sm text-text-muted">
-  <nav class="mb-2 flex flex-wrap gap-x-5 gap-y-2" aria-label={t.a11y.footer}>
-    {(['features', 'about', 'support'] as const).map((p) => <a class="text-text-secondary underline" href={pathFor(locale, p)}>{t.nav[p]}</a>)}
-    <a class="text-text-secondary underline" href="https://instagram.com/smida_fit" rel="noopener">Instagram</a>
-  </nav>
-  <p>© 2026 Smida</p>
+<footer class="mt-6 border-t border-border-subtle py-7 text-sm text-text-muted">
+  <div class="wrap flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-3.5">
+      <img src={icon} alt="" width="32" height="32" class="rounded-[7px] shadow-[0_0_0_1px_rgb(255_255_255/.06)]" />
+      <small class="font-mono text-[13px]">© 2026 Smida · smida.fit</small>
+    </div>
+    <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label={t.a11y.footer}>
+      {(['features', 'about', 'support'] as const).map((p) => <a class="text-text-secondary no-underline hover:text-text-primary" href={pathFor(locale, p)}>{t.nav[p]}</a>)}
+      <a class="text-text-secondary no-underline hover:text-text-primary" href="https://instagram.com/smida_fit" rel="noopener">Instagram</a>
+    </nav>
+  </div>
 </footer>

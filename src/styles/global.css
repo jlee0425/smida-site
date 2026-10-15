@@ -30,7 +30,12 @@
   .ki { position: relative; display: inline-block; margin: 0 .03em; }
   .ki::after { content: ""; position: absolute; left: 50%; top: .07em; width: .14em; height: .14em; background: var(--color-brand-500); transform: translateX(-50%) rotate(45deg); }
   .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 22px; border-radius: 14px; font-weight: 700; text-decoration: none; }
-  .btn-primary { background: var(--gradient-cta); color: var(--color-surface); }
+  .btn-primary { background: var(--gradient-cta); color: var(--color-surface); box-shadow: 0 6px 20px rgb(255 106 43 / .3); }
+  .btn-primary:hover { filter: brightness(1.07); }
+  .btn-sm { min-height: 40px; padding: 8px 18px; font-size: 14px; border-radius: 10px; }
+  /* Page container (design v2): 1200px, 20px gutters on phones, 32px from 1001px. */
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  @media (min-width: 1001px) { .wrap { padding: 0 32px; } }
   .btn-secondary { background: var(--color-surface-card); color: var(--color-text-primary); border: 1px solid var(--color-border-default); }
   .lead { font-size: clamp(19px, 4.6vw, 24px); line-height: 1.45; font-weight: 600; max-width: 40ch; margin: 0 0 20px; }
   .page-h { font-size: clamp(32px, 9vw, 52px); line-height: 1.05; font-weight: 700; margin: 32px 0 12px; letter-spacing: -.02em; }

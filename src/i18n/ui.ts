@@ -8,25 +8,42 @@ export const localeNames: Record<Locale, string> = { en: 'EN', ja: '日本語', 
 export const ogLocale: Record<Locale, string> = { en: 'en_US', ja: 'ja_JP', ko: 'ko_KR' };
 
 type Item = { title: string; body: string };
-type Milestone = { stage: string; text: string; done?: boolean };
+
+/** The home page phone: one real app capture per key (src/assets/screens/<key>.<locale>.webp). */
+export const screens = ['home', 'timer', 'quick-log', 'prbook', 'open'] as const;
+export type Screen = (typeof screens)[number];
+type Tag = { t: string; g?: 'time' | 'amrap' | 'emom' | 'tabata' | 'rx' | 'pr' };
+type Feature = { key: Screen; kicker: string; title: string; body: string; tags: Tag[] };
+/** Text on the HTML share-card renders (mirrors the app's card in each language). */
+type CardText = Record<
+  | 'date' | 'reps' | 'thrusters' | 'pullups' | 'bw' | 'forTime' | 'rxd' | 'prTime'
+  | 'min20' | 'roundsOf' | 'pushups' | 'airSquats' | 'roundsReps' | 'scaled'
+  | 'lift' | 'oneRm' | 'liftRow' | 'strength' | 'prLift' | 'prev' | 'capTime' | 'capAmrap' | 'capLift',
+  string
+>;
 
 export interface Dict {
-  a11y: { main: string; footer: string; language: string; done: string; getInvolved: string; ogAlt: string };
+  a11y: { main: string; footer: string; language: string; getInvolved: string; ogAlt: string };
   nav: Record<'features' | 'about' | 'support', string>;
   cta: { follow: string; beta: string; band: string };
   meta: Record<Page, { title: string; description: string }>;
-  hero: { story: string; pitch: string };
+  hero: { story: string };
   why: { heading: string; lead: string; values: Item[] };
-  look: { heading: string; today: string; timer: string; prs: string; share: string };
+  look: { heading: string; today: string; share: string };
   how: { heading: string; steps: Item[] };
-  milestones: { heading: string; items: Milestone[] };
   features: { heading: string; lead: string; what: string; items: Item[] };
   about: { heading: string; story: string; storyBody: string; name: string; nameBody: string; next: string; nextBody: string };
   support: { heading: string; faq: { q: string; a: string }[]; contact: string };
+  home: {
+    kicker: string; title: string; lede: string; join: string; joinNote: string;
+    screensLabel: string; shots: string; chips: Record<Screen, string>; alt: Record<Screen, string>;
+    features: Feature[];
+    share: { kicker: string; title: string; body: string; card: CardText };
+  };
 }
 
 const en: Dict = {
-  a11y: { main: 'Main', footer: 'Footer', language: 'Language', done: 'done', getInvolved: 'Get involved', ogAlt: 'smida: Swedish for to forge. Functional fitness and hybrid race log.' },
+  a11y: { main: 'Main', footer: 'Footer', language: 'Language', getInvolved: 'Get involved', ogAlt: 'smida: Swedish for to forge. Functional fitness and hybrid race log.' },
   nav: { features: 'Features', about: 'About', support: 'Support' },
   cta: { follow: 'Follow @smida_fit', beta: 'Join the beta', band: 'Train with us from day one.' },
   meta: {
@@ -37,7 +54,6 @@ const en: Dict = {
   },
   hero: {
     story: 'smida — Swedish for <em>to forge</em>',
-    pitch: 'A training log for functional fitness and hybrid racing: timers, benchmarks, PRs. Built at a box in Tokyo.',
   },
   why: {
     heading: 'Why Smida',
@@ -51,8 +67,6 @@ const en: Dict = {
   look: {
     heading: 'A first look',
     today: 'Today: log any WOD and see your PR at a glance.',
-    timer: 'Timers built for the box: count-in, rounds, rest.',
-    prs: 'Your PR history, every lift and every benchmark.',
     share: 'A result card, ready for your story.',
   },
   how: {
@@ -62,16 +76,6 @@ const en: Dict = {
       { title: 'Time it', body: 'Run the timer: count-in, rounds and rest.' },
       { title: 'See your progress', body: 'Every result lands in your PR history.' },
       { title: 'Share with your box', body: 'Post a result card to your story.' },
-    ],
-  },
-  milestones: {
-    heading: 'Milestones',
-    items: [
-      { stage: 'Now', text: 'Built and tested every day at a Tokyo box', done: true },
-      { stage: 'Next', text: 'The Smida beta with our box (iPhone &amp; Android)' },
-      { stage: 'Later', text: 'Launch in Japan' },
-      { stage: 'Later', text: 'Train together: share results, follow your box' },
-      { stage: 'Later', text: 'Korea, then more' },
     ],
   },
   features: {
@@ -108,10 +112,60 @@ const en: Dict = {
     ],
     contact: 'Contact',
   },
+  home: {
+    kicker: 'Built for functional fitness',
+    title: 'Forge every rep into a record.',
+    lede: 'A training log for functional fitness and hybrid racing. Timers, benchmarks and PRs, all in one place.',
+    join: 'Email us to join the beta',
+    joinNote: 'iPhone and Android · Tell us which one you use.',
+    screensLabel: 'App screens',
+    shots: 'Screens from the current build',
+    chips: { home: 'Home', timer: 'Timer', 'quick-log': 'Quick Log', prbook: 'PR Book', open: 'Open' },
+    alt: {
+      home: 'Smida home screen: Log Workout, recent PRs and recent activity',
+      timer: 'The AMRAP timer running, with the round counter',
+      'quick-log': 'Quick Log for Fran: movements, scale and score',
+      prbook: 'The PR Book: lifts with their best loads',
+      open: 'Open workouts grouped by year, with scores',
+    },
+    features: [
+      {
+        key: 'timer', kicker: '01 · Timers', title: 'Four timers. No setup.',
+        body: 'For Time, AMRAP, EMOM and Tabata with a count-in, round counter and progress ring. Start one from a workout and the result drops straight into your log.',
+        tags: [{ t: 'For Time', g: 'time' }, { t: 'AMRAP', g: 'amrap' }, { t: 'EMOM', g: 'emom' }, { t: 'Tabata', g: 'tabata' }],
+      },
+      {
+        key: 'quick-log', kicker: '02 · Quick Log', title: 'Log it before the chalk dries.',
+        body: 'Score, scale and status in a few taps: RX+, RX or Scaled, with your loads and notes. Link the result to a benchmark and it counts toward your PRs.',
+        tags: [{ t: 'RX+' }, { t: 'RX', g: 'rx' }, { t: 'Scaled' }],
+      },
+      {
+        key: 'prbook', kicker: '03 · Benchmarks & PR Book', title: 'Every PR, kept for you.',
+        body: 'Lifts, gymnastics, cardio, benchmark WODs and hybrid races in one book. Fran, Cindy, your 1RM back squat: each with its full history and every attempt.',
+        tags: [{ t: 'Lift' }, { t: 'Gymnastics' }, { t: 'Cardio' }, { t: 'Benchmark WODs' }, { t: 'PR', g: 'pr' }],
+      },
+      {
+        key: 'open', kicker: '04 · Open workouts', title: 'The Open, ready when you are.',
+        body: 'Past Open workouts with their standards and scoring built in. Pick one, log an attempt, and track every retest.',
+        tags: [],
+      },
+    ],
+    share: {
+      kicker: 'Share cards',
+      title: 'Every result, ready to post.',
+      body: "Finish a workout and Smida builds the card: the full workout, your score, RX'd and PR. Sized for Stories and the feed.",
+      card: {
+        date: 'Oct 15', reps: 'reps', thrusters: 'Thrusters', pullups: 'Pull-ups', bw: 'bodyweight', forTime: 'FOR TIME', rxd: "RX'd", prTime: 'PR −14s',
+        min20: '20 min', roundsOf: 'rounds of', pushups: 'Push-ups', airSquats: 'Air squats', roundsReps: 'rounds + reps', scaled: 'Scaled',
+        lift: 'Back Squat', oneRm: 'one-rep max', liftRow: 'Back squat', strength: 'STRENGTH', prLift: 'PR +5 kg', prev: 'previous 135 kg · Aug 2',
+        capTime: 'For Time · PR', capAmrap: 'AMRAP · Scaled', capLift: 'Strength · 1RM',
+      },
+    },
+  },
 };
 
 const ja: Dict = {
-  a11y: { main: 'メイン', footer: 'フッター', language: '言語', done: '完了', getInvolved: '参加する', ogAlt: 'smida：スウェーデン語で「鍛える」。ファンクショナルフィットネスとハイブリッドレースのトレーニング記録アプリ。' },
+  a11y: { main: 'メイン', footer: 'フッター', language: '言語', getInvolved: '参加する', ogAlt: 'smida：スウェーデン語で「鍛える」。ファンクショナルフィットネスとハイブリッドレースのトレーニング記録アプリ。' },
   nav: { features: '機能', about: 'Smidaについて', support: 'サポート' },
   cta: { follow: '@smida_fit をフォロー', beta: 'ベータ版に参加する', band: '最初の一日から、一緒にトレーニングしませんか。' },
   meta: {
@@ -122,7 +176,6 @@ const ja: Dict = {
   },
   hero: {
     story: 'smida — スウェーデン語で「<em>鍛える</em>」',
-    pitch: 'ファンクショナルフィットネスとハイブリッドレースのためのトレーニング記録アプリ。タイマーも、ベンチマークも、自己ベストも。東京のボックス発です。',
   },
   why: {
     heading: 'Smida が目指すもの',
@@ -136,8 +189,6 @@ const ja: Dict = {
   look: {
     heading: 'アプリをのぞいてみる',
     today: 'Today：どんなWODもすぐに記録して、自己ベストもひと目でチェック。',
-    timer: 'ボックス仕様のタイマー：カウントダウン、ラウンド、レスト。',
-    prs: 'リフトもベンチマークも、自己ベストの履歴がすべてここに。',
     share: 'そのままストーリーに載せられる記録カード。',
   },
   how: {
@@ -147,16 +198,6 @@ const ja: Dict = {
       { title: '時間を計る', body: 'タイマーをスタート。カウントダウン、ラウンド、レストまでおまかせ。' },
       { title: '成長を確かめる', body: 'すべての記録が自己ベストの履歴に残ります。' },
       { title: '仲間とシェアする', body: '記録カードをストーリーに投稿できます。' },
-    ],
-  },
-  milestones: {
-    heading: 'ロードマップ',
-    items: [
-      { stage: 'いま', text: '東京のボックスで毎日開発・テスト中', done: true },
-      { stage: '次に', text: '私たちのボックスで Smida ベータ版を開始（iPhone・Android）' },
-      { stage: 'その先', text: '日本でリリース' },
-      { stage: 'その先', text: '一緒にトレーニング：記録をシェアし、ボックスをフォロー' },
-      { stage: 'その先', text: '韓国、そしてその先へ' },
     ],
   },
   features: {
@@ -193,10 +234,60 @@ const ja: Dict = {
     ],
     contact: 'お問い合わせ',
   },
+  home: {
+    kicker: 'ファンクショナルフィットネスに打ち込む人へ',
+    title: 'レップを重ねて、記録を鍛える。',
+    lede: 'ファンクショナルフィットネスとハイブリッドレースのためのトレーニング記録アプリです。タイマーも、ベンチマークも、自己ベストも、ひとつのアプリで。',
+    join: 'メールでベータ版に参加する',
+    joinNote: 'iPhone・Android 対応 · お使いの端末を書いてお送りください。',
+    screensLabel: 'アプリの画面',
+    shots: '最新ビルドの実際の画面です',
+    chips: { home: 'ホーム', timer: 'タイマー', 'quick-log': 'クイックログ', prbook: 'PRブック', open: 'オープン' },
+    alt: {
+      home: 'Smida のホーム画面：ワークアウトの記録、最近の自己ベスト、最近のアクティビティ',
+      timer: 'AMRAP タイマーの実行中画面とラウンドカウンター',
+      'quick-log': 'Fran のクイックログ：種目、スケール、スコア',
+      prbook: 'PRブック：リフトごとのベスト重量',
+      open: '年ごとに並んだオープンのワークアウトとスコア',
+    },
+    features: [
+      {
+        key: 'timer', kicker: '01 · タイマー', title: 'タイマーは4種類。設定いらず。',
+        body: 'For Time、AMRAP、EMOM、Tabata。カウントダウン、ラウンドカウンター、進行リング付きです。ワークアウトからタイマーを始めれば、結果はそのまま記録に残ります。',
+        tags: [{ t: 'For Time', g: 'time' }, { t: 'AMRAP', g: 'amrap' }, { t: 'EMOM', g: 'emom' }, { t: 'Tabata', g: 'tabata' }],
+      },
+      {
+        key: 'quick-log', kicker: '02 · クイックログ', title: 'チョークが乾く前に、記録完了。',
+        body: 'スコア、スケール、ステータスを数タップで。RX+・RX・スケールを選んで、重量やメモも残せます。ベンチマークにひも付ければ、自己ベストにも反映されます。',
+        tags: [{ t: 'RX+' }, { t: 'RX', g: 'rx' }, { t: 'スケール' }],
+      },
+      {
+        key: 'prbook', kicker: '03 · ベンチマークとPRブック', title: '自己ベストは、すべてここに。',
+        body: 'リフト、ジムナスティクス、カーディオ、ベンチマークWOD、ハイブリッドレースを1冊に。Fran も Cindy も 1RM のバックスクワットも、これまでの挑戦をすべて履歴で振り返れます。',
+        tags: [{ t: 'リフト' }, { t: 'ジムナスティクス' }, { t: 'カーディオ' }, { t: 'ベンチマークWOD' }, { t: 'PR', g: 'pr' }],
+      },
+      {
+        key: 'open', kicker: '04 · オープン', title: 'オープンのワークアウトを、好きなときに。',
+        body: '過去のオープンのワークアウトを、スタンダードとスコアリング込みで収録しています。選んで記録するだけで、再挑戦の結果もすべて追いかけられます。',
+        tags: [],
+      },
+    ],
+    share: {
+      kicker: 'シェアカード',
+      title: 'どの記録も、そのまま投稿できます。',
+      body: 'ワークアウトを終えると、Smida がカードをつくります。ワークアウトの内容、スコア、RX\'d、自己ベストまで。ストーリーにもフィードにも合うサイズです。',
+      card: {
+        date: '10月15日', reps: 'レップ', thrusters: 'スラスター', pullups: 'プルアップ', bw: '自重', forTime: 'フォータイム', rxd: "RX'd", prTime: '自己ベスト −14秒',
+        min20: '20分', roundsOf: 'ラウンドを繰り返す', pushups: 'プッシュアップ', airSquats: 'エアスクワット', roundsReps: 'ラウンド + レップ', scaled: 'スケール',
+        lift: 'バックスクワット', oneRm: '最大挙上重量', liftRow: 'バックスクワット', strength: 'ストレングス', prLift: '自己ベスト +5 kg', prev: '前回 135 kg · 8月2日',
+        capTime: 'フォータイム · 自己ベスト', capAmrap: 'AMRAP · スケール', capLift: 'ストレングス · 1RM',
+      },
+    },
+  },
 };
 
 const ko: Dict = {
-  a11y: { main: '메인', footer: '푸터', language: '언어', done: '완료', getInvolved: '참여하기', ogAlt: 'smida: 스웨덴어로 ‘단련하다’. 기능성 피트니스와 하이브리드 레이스를 위한 운동 기록 앱.' },
+  a11y: { main: '메인', footer: '푸터', language: '언어', getInvolved: '참여하기', ogAlt: 'smida: 스웨덴어로 ‘단련하다’. 기능성 피트니스와 하이브리드 레이스를 위한 운동 기록 앱.' },
   nav: { features: '기능', about: '소개', support: '고객 지원' },
   cta: { follow: '@smida_fit 팔로우', beta: '베타 참여하기', band: '첫날부터 함께하세요.' },
   meta: {
@@ -207,7 +298,6 @@ const ko: Dict = {
   },
   hero: {
     story: 'smida — 스웨덴어로 ‘<em>단련하다</em>’',
-    pitch: '기능성 피트니스와 하이브리드 레이스를 위한 운동 기록 앱. 타이머, 벤치마크, 개인 최고 기록(PR)까지. 도쿄의 한 박스에서 시작됐습니다.',
   },
   why: {
     heading: 'Smida를 만든 이유',
@@ -221,8 +311,6 @@ const ko: Dict = {
   look: {
     heading: '미리 보기',
     today: 'Today: 어떤 WOD든 바로 기록하고 PR도 한눈에 확인하세요.',
-    timer: '박스에 맞춘 타이머: 카운트다운, 라운드, 휴식.',
-    prs: '모든 리프트와 벤치마크의 PR 기록을 한곳에.',
     share: '스토리에 바로 올릴 수 있는 기록 카드.',
   },
   how: {
@@ -232,16 +320,6 @@ const ko: Dict = {
       { title: '시간 재기', body: '타이머를 시작하세요. 카운트다운, 라운드, 휴식까지 알아서 챙겨 줍니다.' },
       { title: '성장 확인하기', body: '모든 기록이 PR 히스토리에 쌓입니다.' },
       { title: '박스 사람들과 공유하기', body: '기록 카드를 스토리에 올려 보세요.' },
-    ],
-  },
-  milestones: {
-    heading: '로드맵',
-    items: [
-      { stage: '지금', text: '도쿄의 한 박스에서 매일 개발하고 테스트하는 중', done: true },
-      { stage: '다음', text: '우리 박스에서 Smida 베타 시작(iPhone·Android)' },
-      { stage: '이후', text: '일본 출시' },
-      { stage: '이후', text: '함께 운동하기: 기록 공유, 내 박스 팔로우' },
-      { stage: '이후', text: '한국, 그리고 더 많은 곳으로' },
     ],
   },
   features: {
@@ -277,6 +355,56 @@ const ko: Dict = {
       { q: '데이터를 백업하거나 옮기려면 어떻게 하나요?', a: '앱에서 백업 파일을 내보내 원하는 곳(예: 본인의 클라우드 드라이브)에 저장하세요. 새 휴대폰에서 그 파일을 불러오면 복원됩니다.' },
     ],
     contact: '문의',
+  },
+  home: {
+    kicker: '기능성 피트니스로 운동하는 사람들을 위해',
+    title: '한 렙 한 렙, 기록으로 단련합니다.',
+    lede: '기능성 피트니스와 하이브리드 레이스를 위한 운동 기록 앱입니다. 타이머, 벤치마크, 개인 최고 기록(PR)까지 한곳에서 관리하세요.',
+    join: '메일로 베타 신청하기',
+    joinNote: 'iPhone·Android 지원 · 사용 중인 기기를 적어 보내 주세요.',
+    screensLabel: '앱 화면',
+    shots: '현재 빌드의 실제 화면입니다',
+    chips: { home: '홈', timer: '타이머', 'quick-log': '퀵 로그', prbook: 'PR 북', open: '오픈' },
+    alt: {
+      home: 'Smida 홈 화면: 운동 기록 버튼, 최근 PR, 최근 활동',
+      timer: '라운드 카운터가 있는 AMRAP 타이머 실행 화면',
+      'quick-log': 'Fran 퀵 로그: 동작, 스케일, 점수',
+      prbook: 'PR 북: 리프트별 최고 무게',
+      open: '연도별로 정리된 오픈 운동과 점수',
+    },
+    features: [
+      {
+        key: 'timer', kicker: '01 · 타이머', title: '타이머 4종, 설정은 필요 없습니다.',
+        body: 'For Time, AMRAP, EMOM, Tabata를 카운트다운, 라운드 카운터, 진행 링과 함께 제공합니다. 운동에서 타이머를 시작하면 결과가 바로 기록에 남습니다.',
+        tags: [{ t: 'For Time', g: 'time' }, { t: 'AMRAP', g: 'amrap' }, { t: 'EMOM', g: 'emom' }, { t: 'Tabata', g: 'tabata' }],
+      },
+      {
+        key: 'quick-log', kicker: '02 · 퀵 로그', title: '초크가 마르기 전에 기록을 끝냅니다.',
+        body: '점수, 스케일, 상태를 몇 번의 탭으로 입력합니다. RX+, RX, 스케일 중에서 고르고 무게와 메모도 남길 수 있습니다. 벤치마크에 연결하면 PR에도 반영됩니다.',
+        tags: [{ t: 'RX+' }, { t: 'RX', g: 'rx' }, { t: '스케일' }],
+      },
+      {
+        key: 'prbook', kicker: '03 · 벤치마크와 PR 북', title: '모든 PR을 빠짐없이 남겨 둡니다.',
+        body: '리프트, 짐내스틱, 카디오, 벤치마크 WOD, 하이브리드 레이스를 한 권에 담았습니다. Fran, Cindy, 1RM 백 스쿼트까지 모든 시도를 전체 기록과 함께 확인할 수 있습니다.',
+        tags: [{ t: '리프트' }, { t: '짐내스틱' }, { t: '카디오' }, { t: '벤치마크 WOD' }, { t: 'PR', g: 'pr' }],
+      },
+      {
+        key: 'open', kicker: '04 · 오픈', title: '오픈 운동, 원할 때 언제든 도전하세요.',
+        body: '지난 오픈 운동을 기준과 채점 방식까지 담아 두었습니다. 하나를 골라 기록하고, 재도전할 때마다 결과를 비교해 보세요.',
+        tags: [],
+      },
+    ],
+    share: {
+      kicker: '공유 카드',
+      title: '모든 기록을 바로 올릴 수 있습니다.',
+      body: "운동을 마치면 Smida가 카드를 만들어 줍니다. 운동 내용, 점수, RX'd, PR까지 담았습니다. 스토리와 피드에 맞는 크기입니다.",
+      card: {
+        date: '10월 15일', reps: '회', thrusters: '스러스터', pullups: '풀업', bw: '맨몸', forTime: '포 타임', rxd: "RX'd", prTime: 'PR −14초',
+        min20: '20분', roundsOf: '라운드 반복', pushups: '푸시업', airSquats: '에어 스쿼트', roundsReps: '라운드 + 렙', scaled: '스케일',
+        lift: '백 스쿼트', oneRm: '1회 최대 중량', liftRow: '백 스쿼트', strength: '스트렝스', prLift: 'PR +5 kg', prev: '이전 135 kg · 8월 2일',
+        capTime: '포 타임 · PR', capAmrap: 'AMRAP · 스케일', capLift: '스트렝스 · 1RM',
+      },
+    },
   },
 };
 

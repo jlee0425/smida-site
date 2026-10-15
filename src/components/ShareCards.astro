@@ -1,0 +1,119 @@
+---
+// HTML/CSS renders of the app's 1080×1920 share card (design v2), scaled with --cs. Text follows the page language.
+import { getLocale, useT } from '../i18n/utils';
+const locale = getLocale(Astro.currentLocale);
+const s = useT(locale).home.share;
+const c = s.card;
+---
+<section class="share" id="share">
+  <div class="wrap">
+    <div class="sh-head">
+      <div><p class="kicker">{s.kicker}</p><h2 class="disp">{s.title}</h2></div>
+      <p>{s.body}</p>
+    </div>
+    <div class="sc-row">
+      <figure class="cardfig">
+        <div class="cardbox" aria-hidden="true">
+          <div class="sc t-time">
+            <div class="main">
+              <div class="hd"><span class="name">Fran</span><span class="date">{c.date}</span></div>
+              <div class="mv">
+                <div class="sx"><b>21-15-9</b><span>{c.reps}</span></div>
+                <div class="r"><span class="m">{c.thrusters}</span><span class="w">43 kg</span></div>
+                <div class="r"><span class="m">{c.pullups}</span><span class="w bw">{c.bw}</span></div>
+              </div>
+            </div>
+            <div class="main">
+              <span class="tp">{c.forTime}</span>
+              <div class="score">3:28</div>
+              <div class="cch"><span class="cc rx">{c.rxd}</span><span class="cc pr">{c.prTime}</span></div>
+            </div>
+            <div class="ft"><span class="wm">sm<span class="ki">ı</span>da</span><span class="dom">smida.fit</span></div>
+          </div>
+        </div>
+        <figcaption>{c.capTime}</figcaption>
+      </figure>
+
+      <figure class="cardfig">
+        <div class="cardbox" aria-hidden="true">
+          <div class="sc t-amrap">
+            <div class="main">
+              <div class="hd"><span class="name">Cindy</span><span class="date">{c.date}</span></div>
+              <div class="mv">
+                <div class="sx"><b>{c.min20}</b><span>{c.roundsOf}</span></div>
+                <div class="r rp"><span class="n">5</span><span class="m">{c.pullups}</span><span></span></div>
+                <div class="r rp"><span class="n">10</span><span class="m">{c.pushups}</span><span></span></div>
+                <div class="r rp"><span class="n">15</span><span class="m">{c.airSquats}</span><span></span></div>
+              </div>
+            </div>
+            <div class="main">
+              <span class="tp">AMRAP</span>
+              <div class="score" style="--fs:340px">18+7</div>
+              <div class="unit">{c.roundsReps}</div>
+              <div class="cch"><span class="cc scaled">{c.scaled}</span></div>
+            </div>
+            <div class="ft"><span class="wm">sm<span class="ki">ı</span>da</span><span class="dom">smida.fit</span></div>
+          </div>
+        </div>
+        <figcaption>{c.capAmrap}</figcaption>
+      </figure>
+
+      <figure class="cardfig">
+        <div class="cardbox" aria-hidden="true">
+          <div class="sc t-lift">
+            <div class="main">
+              <div class="hd"><span class="name" style={locale === 'ja' ? '--nfs:84px' : undefined}>{c.lift}</span><span class="date">{c.date}</span></div>
+              <div class="mv">
+                <div class="sx"><b>1RM</b><span>{c.oneRm}</span></div>
+                <div class="r rp"><span class="n">1×</span><span class="m">{c.liftRow}</span><span class="w">140 kg</span></div>
+              </div>
+            </div>
+            <div class="main">
+              <span class="tp">{c.strength}</span>
+              <div class="score">140<small>kg</small></div>
+              <div class="cch"><span class="cc pr">{c.prLift}</span></div>
+              <div class="prev">{c.prev}</div>
+            </div>
+            <div class="ft"><span class="wm">sm<span class="ki">ı</span>da</span><span class="dom">smida.fit</span></div>
+          </div>
+        </div>
+        <figcaption>{c.capLift}</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sc { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; padding: 250px 96px; overflow: hidden; color: var(--color-text-primary); display: flex; flex-direction: column; justify-content: space-between; font-family: var(--font-sans); background: radial-gradient(80% 55% at 88% 62%, var(--glow), transparent 62%), linear-gradient(165deg, var(--color-surface-elevated), var(--color-bg-end)); transform: scale(var(--cs)); transform-origin: 0 0; }
+  .t-time { --g: var(--gradient-for-time); --glow: rgb(255 106 43 / .22); }
+  .t-amrap { --g: var(--gradient-amrap); --glow: rgb(167 123 255 / .22); }
+  .t-lift { --g: linear-gradient(var(--color-text-primary), var(--color-text-primary)); --glow: rgb(255 106 43 / .13); }
+  .hd { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; }
+  .name, .sx b, .r .n, .score { font-family: "Archivo", var(--font-sans); font-weight: 800; font-variation-settings: "wdth" 112; }
+  .name { font-size: var(--nfs, 120px); line-height: .95; letter-spacing: -.03em; white-space: nowrap; }
+  .date { font: 500 28px/1 var(--font-mono); color: var(--color-text-muted); white-space: nowrap; }
+  .main { display: flex; flex-direction: column; }
+  .mv { margin-top: 56px; }
+  .sx { display: flex; align-items: baseline; gap: 16px; padding-bottom: 20px; }
+  .sx b { font-size: 64px; line-height: 1; letter-spacing: -.02em; }
+  .sx span { font-weight: 500; font-size: 32px; line-height: 1; color: var(--color-text-secondary); }
+  .r { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 20px; padding: 22px 0; border-top: 1px solid rgb(255 255 255 / .12); }
+  .r.rp { grid-template-columns: 100px minmax(0, 1fr) auto; }
+  .r .n { font-size: 46px; line-height: 1; }
+  .r .m { font-weight: 600; font-size: 42px; line-height: 1.1; }
+  .r .w { font-weight: 700; font-size: 40px; line-height: 1; white-space: nowrap; }
+  .r .bw { font-weight: 500; font-size: 30px; color: var(--color-text-muted); }
+  .tp { align-self: flex-start; font-weight: 800; font-size: 44px; line-height: 1; letter-spacing: .14em; padding: 20px 30px 18px; border-radius: 16px; background-image: var(--g); color: var(--color-surface); box-shadow: 0 12px 48px var(--glow); margin-top: 72px; white-space: nowrap; }
+  .score { font-size: var(--fs, 360px); line-height: .86; letter-spacing: -.045em; font-variant-numeric: tabular-nums; white-space: nowrap; margin-top: 24px; padding-bottom: .03em; background-image: var(--g); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .score small { font-size: .3em; letter-spacing: -.01em; margin-left: .1em; }
+  .unit { font-weight: 500; font-size: 34px; line-height: 1; color: var(--color-text-secondary); margin-top: 18px; }
+  .cch { display: flex; gap: 16px; margin-top: 48px; }
+  .cc { font-weight: 800; font-size: 30px; line-height: 1; padding: 17px 28px; border-radius: 99px; white-space: nowrap; }
+  .rx { background: rgb(184 242 90 / .12); box-shadow: inset 0 0 0 2px rgb(184 242 90 / .55); color: var(--color-rx); }
+  .scaled { box-shadow: inset 0 0 0 2px rgb(255 255 255 / .24); color: var(--color-text-secondary); }
+  .pr { background: var(--gradient-pr); color: var(--color-surface); }
+  .prev { font: 500 28px/1 var(--font-mono); color: var(--color-text-muted); margin-top: 30px; }
+  .ft { display: flex; justify-content: space-between; align-items: center; }
+  .ft .wm { font-size: 48px; color: var(--color-text-primary); }
+  .dom { font: 500 26px/1 var(--font-mono); color: var(--color-text-muted); }
+</style>

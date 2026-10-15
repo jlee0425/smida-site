@@ -11,23 +11,31 @@ const locale = getLocale(Astro.currentLocale);
 const t = useT(locale);
 const links = (['features', 'about', 'support'] as const).map((p) => ({ p, href: pathFor(locale, p), label: t.nav[p] }));
 ---
-<header class="flex flex-wrap items-center justify-between gap-2 py-4">
-  <a class="wm text-[28px] text-text-primary no-underline" href={pathFor(locale, '')}>sm<span class="ki">ı</span>da</a>
-  <nav
-    class="order-3 flex basis-full gap-1 border-t border-border-subtle pt-2 md:order-none md:ml-auto md:mr-2 md:basis-auto md:border-0 md:pt-0"
-    aria-label={t.a11y.main}
-  >
-    {
-      links.map(({ p, href, label }) => (
-        <a
-          href={href}
-          aria-current={p === page ? 'page' : undefined}
-          class="inline-flex min-h-10 items-center rounded-lg px-2.5 py-2 text-[15px] font-semibold text-text-secondary no-underline first:pl-0 aria-[current=page]:text-text-primary aria-[current=page]:underline aria-[current=page]:decoration-brand-500 aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[6px]"
-        >
-          {label}
-        </a>
-      ))
-    }
-  </nav>
-  <LangSwitch page={page} />
+<header class="top">
+  <div class="wrap flex flex-wrap items-center justify-between gap-x-6 gap-y-1 py-3 md:h-[68px] md:flex-nowrap md:py-0">
+    <a class="wm text-[28px] text-text-primary no-underline md:text-[30px]" href={pathFor(locale, '')}>sm<span class="ki">ı</span>da</a>
+    <nav class="order-3 flex basis-full gap-1 md:order-none md:ml-auto md:basis-auto md:gap-5" aria-label={t.a11y.main}>
+      {
+        links.map(({ p, href, label }) => (
+          <a
+            href={href}
+            aria-current={p === page ? 'page' : undefined}
+            class="inline-flex min-h-10 items-center rounded-lg px-2.5 py-2 text-[15px] font-medium text-text-secondary no-underline first:pl-0 hover:text-text-primary aria-[current=page]:text-text-primary md:px-0"
+          >
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+    <LangSwitch page={page} />
+    <a class="btn btn-primary btn-sm max-md:!hidden" href="mailto:hello@smida.fit?subject=Smida%20beta">{t.cta.beta}</a>
+  </div>
 </header>
+
+<style>
+  /* Sticky, blurred bar from tablet up; on phones it scrolls away (it wraps to two rows there). */
+  .top { border-bottom: 1px solid var(--color-border-subtle); background: rgb(20 18 22 / .86); }
+  @media (min-width: 768px) {
+    .top { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+  }
+</style>

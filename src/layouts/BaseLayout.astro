@@ -7,8 +7,10 @@ import { getLocale, pathFor, useT } from '../i18n/utils';
 
 interface Props {
   page: Page;
+  /** The page lays out its own full-bleed sections (home). */
+  bare?: boolean;
 }
-const { page } = Astro.props;
+const { page, bare = false } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const { title, description } = useT(locale).meta[page];
 const url = (l: typeof locale) => new URL(pathFor(l, page), Astro.site).href;
@@ -58,10 +60,8 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body>
-    <div class="mx-auto max-w-[1040px] px-4">
-      <Header page={page} />
-      <main><slot /></main>
-      <Footer />
-    </div>
+    <Header page={page} />
+    <main class:list={{ wrap: !bare }}><slot /></main>
+    <Footer />
   </body>
 </html>

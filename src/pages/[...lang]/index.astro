@@ -1,37 +1,120 @@
 ---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Ctas from '../../components/Ctas.astro';
-import Values from '../../components/Values.astro';
-import Steps from '../../components/Steps.astro';
-import Milestones from '../../components/Milestones.astro';
-import CtaBand from '../../components/CtaBand.astro';
-import MockToday from '../../components/mocks/MockToday.astro';
-import MockTimer from '../../components/mocks/MockTimer.astro';
-import MockPRs from '../../components/mocks/MockPRs.astro';
+import ShareCards from '../../components/ShareCards.astro';
+import { screens } from '../../i18n/ui';
 import { getLocale, localeStaticPaths, useT } from '../../i18n/utils';
+import icon from '../../assets/brand/s-icon.svg?url';
+import '../../styles/home.css';
 
 export function getStaticPaths() {
   return localeStaticPaths();
 }
-const t = useT(getLocale(Astro.currentLocale));
+const locale = getLocale(Astro.currentLocale);
+const t = useT(locale);
+const h = t.home;
+const shots = import.meta.glob<{ default: ImageMetadata }>('../../assets/screens/*.webp', { eager: true });
+const shot = (key: string) => shots[`../../assets/screens/${key}.${locale}.webp`].default;
+const join = 'mailto:hello@smida.fit?subject=Smida%20beta';
 ---
-<BaseLayout page="">
-  <section class="pt-14 pb-12 md:pt-24 md:pb-18">
-    <h1 class="wm m-0 text-[clamp(88px,26vw,200px)]" aria-label="smida">sm<span class="ki">ı</span>da</h1>
-    <p class="mt-5 font-mono text-sm font-medium tracking-[.04em] text-brand-300" set:html={t.hero.story} />
-    <p class="mt-4 mb-8 max-w-[30ch] text-[clamp(20px,5vw,28px)] leading-[1.35] font-semibold">{t.hero.pitch}</p>
-    <Ctas />
-  </section>
-  <Values />
-  <section aria-labelledby="look">
-    <h2 id="look">{t.look.heading}</h2>
-    <div class="flex flex-wrap justify-center gap-6">
-      <MockToday />
-      <MockTimer />
-      <MockPRs />
+<BaseLayout page="" bare>
+  <div class="wrap">
+    <div class="stage">
+      <section class="hero" data-key="home">
+        <div class="hero-id">
+          <img src={icon} alt="" width="56" height="56" class="ico" />
+          <span class="wm" aria-hidden="true">sm<span class="ki">ı</span>da</span>
+        </div>
+        <p class="kicker">{h.kicker}</p>
+        <h1 class="disp">{h.title}</h1>
+        <p class="lede">{h.lede}</p>
+        <div class="join">
+          <a class="btn btn-primary" href={join}>{h.join}</a>
+          <p class="note">{h.joinNote}</p>
+        </div>
+      </section>
+
+      <aside class="aside" aria-label={h.screensLabel}>
+        <div class="dev">
+          <div class="dev-in">
+            {
+              screens.map((k, i) => (
+                <Picture
+                  src={shot(k)}
+                  formats={['avif']}
+                  fallbackFormat="webp"
+                  widths={[360, 720]}
+                  sizes="(min-width: 1001px) 340px, 320px"
+                  alt={h.alt[k]}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={i === 0 ? 'high' : undefined}
+                  pictureAttributes={{ 'data-key': k, class: i === 0 ? 'on' : undefined }}
+                />
+              ))
+            }
+            <div class="island"></div>
+          </div>
+        </div>
+        <p class="plbl">{h.shots}</p>
+        <div class="pchips">
+          {screens.map((k, i) => <button type="button" data-key={k} class:list={{ on: i === 0 }} aria-pressed={i === 0 ? 'true' : 'false'}>{h.chips[k]}</button>)}
+        </div>
+      </aside>
+
+      <div class="feat" id="features">
+        {
+          h.features.map((f) => (
+            <section class="fb" data-key={f.key}>
+              <p class="kicker">{f.kicker}</p>
+              <h2 class="disp">{f.title}</h2>
+              <p class="body">{f.body}</p>
+              {f.tags.length > 0 && (
+                <div class="ftags">
+                  {f.tags.map((tag) => <span class:list={[tag.g && `gt g-${tag.g}`]}>{tag.t}</span>)}
+                </div>
+              )}
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <ShareCards />
+
+  <section class="cta" id="join">
+    <div class="wrap">
+      <span class="wm" aria-hidden="true">sm<span class="ki">ı</span>da</span>
+      <p class="story" set:html={t.hero.story} />
+      <div class="join">
+        <a class="btn btn-primary" href={join}>{h.join}</a>
+        <p class="note">{h.joinNote}</p>
+      </div>
     </div>
   </section>
-  <Steps />
-  <Milestones />
-  <CtaBand />
 </BaseLayout>
+
+<script>
+  // Static screen switcher: chips swap the capture; on desktop the feature block in the middle of the
+  // viewport (or a clicked one) does too. Without JS the phone shows Home and nothing dims.
+  const stage = document.querySelector<HTMLElement>('.stage')!;
+  const desk = matchMedia('(min-width: 1001px)');
+  const blocks = [...stage.querySelectorAll<HTMLElement>('.hero, .fb')];
+  const show = (key: string) => {
+    stage.querySelectorAll<HTMLElement>('picture[data-key]').forEach((p) => p.classList.toggle('on', p.dataset.key === key));
+    stage.querySelectorAll<HTMLButtonElement>('.pchips button').forEach((b) => {
+      b.classList.toggle('on', b.dataset.key === key);
+      b.setAttribute('aria-pressed', String(b.dataset.key === key));
+    });
+    blocks.forEach((b) => b.classList.toggle('on', b.dataset.key === key));
+  };
+  stage.classList.add('js');
+  stage.querySelectorAll<HTMLButtonElement>('.pchips button').forEach((b) => b.addEventListener('click', () => show(b.dataset.key!)));
+  stage.querySelectorAll<HTMLElement>('.fb').forEach((b) => b.addEventListener('click', () => desk.matches && show(b.dataset.key!)));
+  const io = new IntersectionObserver(
+    (es) => es.forEach((e) => e.isIntersecting && desk.matches && show((e.target as HTMLElement).dataset.key!)),
+    { rootMargin: '-45% 0px -45% 0px' },
+  );
+  blocks.forEach((b) => io.observe(b));
+</script>

@@ -31,9 +31,11 @@ The website for Smida, a training log for functional fitness and hybrid racing. 
 
 `src/styles/tokens.css` is the single token file, named after the app's design tokens so a sync is mechanical (`surfaceCard` → `--color-surface-card` → `bg-surface-card`). Brand assets (wordmark SVG, s-icon SVG, Archivo) are in `src/assets/brand/`.
 
-## Phone mockups
+## App screens
 
-`src/components/mocks/*` are HTML/CSS stand-ins. TODO: swap them for real app screenshots once the app ships Brand v3 (#453).
+The home page phone shows real captures from the app (`src/assets/screens/<screen>.<locale>.webp`, 780 px wide, status bar and gesture bar blanked so no clock or icons show). Astro (`sharp`) turns them into AVIF + WebP at 360 / 720 w at build time. The share cards on the home page are HTML/CSS renders (`src/components/ShareCards.astro`).
+
+`src/components/mocks/*` (features page) are still HTML/CSS stand-ins.
 
 ## Deploy (GitHub Pages)
 
