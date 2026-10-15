@@ -51,7 +51,7 @@ const ogImage = new URL('/og-image.png', Astro.site).href;
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="smida: Swedish for to forge. Functional fitness and hybrid race log." />
+    <meta property="og:image:alt" content={useT(locale).a11y.ogAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
