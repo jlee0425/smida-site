@@ -1,0 +1,11 @@
+---
+import { getLocale, useT } from '../i18n/utils';
+const { why } = useT(getLocale(Astro.currentLocale));
+---
+<section aria-labelledby="why">
+  <h2 id="why">{why.heading}</h2>
+  <p class="lead" set:html={why.lead} />
+  <ul class="cards md:grid-cols-3">
+    {why.values.map((v) => <li><b>{v.title}</b><span>{v.body}</span></li>)}
+  </ul>
+</section>

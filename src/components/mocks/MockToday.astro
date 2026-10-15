@@ -1,0 +1,19 @@
+---
+import PhoneFrame from './PhoneFrame.astro';
+import { getLocale, useT } from '../../i18n/utils';
+const { look } = useT(getLocale(Astro.currentLocale));
+// Mock screen text mirrors the app UI (English build); it is aria-hidden illustration, not site copy.
+---
+<PhoneFrame caption={look.today}>
+  <div><div class="ph-sub">Thu · Oct 15</div><div class="ph-title">Today</div></div>
+  <div class="chips"><span class="chip on">FOR TIME</span><span class="chip">AMRAP</span><span class="chip">EMOM</span><span class="chip">TABATA</span></div>
+  <div class="ph-card">
+    <div class="ph-sub">Today's WOD · For time</div>
+    <div class="ph-row"><b class="text-xl">Fran</b><span class="chip pr">PR −0:14</span></div>
+    <div class="score my-2 text-[52px]">3:28</div>
+    <div class="ph-dim">21-15-9 · Thrusters, Pull-ups</div>
+    <div class="chips mt-2"><span class="chip rx">RX'd</span></div>
+  </div>
+  <div class="ph-card"><div class="ph-sub">Strength</div><div class="ph-row"><b>Back Squat 5×3</b><span class="ph-dim">120 kg</span></div></div>
+  <div class="ph-cta">Start Timer</div>
+</PhoneFrame>

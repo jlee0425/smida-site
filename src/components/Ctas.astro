@@ -1,0 +1,8 @@
+---
+import { getLocale, useT } from '../i18n/utils';
+const { cta } = useT(getLocale(Astro.currentLocale));
+---
+<div class="flex flex-wrap gap-3">
+  <a class="btn btn-primary" href="https://instagram.com/smida_fit" rel="noopener">{cta.follow}</a>
+  <a class="btn btn-secondary" href="mailto:hello@smida.fit?subject=Smida%20beta">{cta.beta}</a>
+</div>

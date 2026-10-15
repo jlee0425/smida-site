@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://smida.fit/sitemap-index.xml

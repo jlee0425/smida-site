@@ -1,0 +1,35 @@
+---
+import PhoneFrame from './PhoneFrame.astro';
+import { getLocale, useT } from '../../i18n/utils';
+const { look } = useT(getLocale(Astro.currentLocale));
+const rows = [
+  { name: 'Back Squat', value: '140 kg', sub: '1RM · Oct 9', pr: true, spark: [45, 55, 60, 58, 70, 78, 100] },
+  { name: 'Fran', value: '3:28', sub: "For time · RX'd", pr: false, spark: [40, 52, 50, 66, 72, 85, 100] },
+  { name: 'Murph', value: '41:12', sub: 'For time', pr: false, spark: [60, 64, 70, 75, 90, 100] },
+];
+---
+<PhoneFrame caption={look.prs}>
+  <div><div class="ph-sub">History</div><div class="ph-title">Your PRs</div></div>
+  <div class="grid gap-2">
+    {
+      rows.map((r) => (
+        <div class="ph-card row">
+          <b>{r.name}</b>
+          <span class="v">{r.value}</span>
+          <span class="ph-sub">{r.sub}</span>
+          {r.pr ? <span class="chip pr justify-self-end">PR</span> : <span />}
+          <div class="spark">{r.spark.map((h) => <i style={`height:${h}%`} />)}</div>
+        </div>
+      ))
+    }
+  </div>
+</PhoneFrame>
+
+<style>
+  .row { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: end; }
+  b { font-size: 14px; }
+  .v { font: 700 15px var(--font-mono); color: var(--color-text-primary); }
+  .spark { display: flex; align-items: flex-end; gap: 3px; height: 22px; grid-column: 1 / -1; }
+  .spark i { flex: 1; background: var(--color-border-default); border-radius: 2px; }
+  .spark i:last-child { background: var(--gradient-pr); }
+</style>

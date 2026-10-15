@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Values from '../../components/Values.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { getLocale, localeStaticPaths, useT } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+const { about } = useT(getLocale(Astro.currentLocale));
+---
+<BaseLayout page="about">
+  <h1 class="page-h">{about.heading}</h1>
+  <section aria-labelledby="story">
+    <h2 id="story">{about.story}</h2>
+    <p>{about.storyBody}</p>
+  </section>
+  <section aria-labelledby="name">
+    <h2 id="name">{about.name}</h2>
+    <p set:html={about.nameBody} />
+  </section>
+  <Values />
+  <section aria-labelledby="next">
+    <h2 id="next">{about.next}</h2>
+    <p>{about.nextBody}</p>
+  </section>
+  <CtaBand />
+</BaseLayout>

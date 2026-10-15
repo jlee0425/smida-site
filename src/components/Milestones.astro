@@ -1,0 +1,33 @@
+---
+import { getLocale, useT } from '../i18n/utils';
+const t = useT(getLocale(Astro.currentLocale));
+---
+<section aria-labelledby="road">
+  <h2 id="road">{t.milestones.heading}</h2>
+  <ol>
+    {
+      t.milestones.items.map((m) => (
+        <li class:list={{ done: m.done }}>
+          <time datetime={m.datetime}>{m.when}</time>
+          <span>
+            <Fragment set:html={m.text} />
+            {m.done && ' '}
+            {m.done && <span class="check" role="img" aria-label={t.a11y.done}>✓</span>}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  ol { display: grid; gap: 10px; }
+  li { display: grid; grid-template-columns: 104px 1fr; gap: 12px; background: var(--color-surface-card); border-radius: 14px; padding: 14px 16px; }
+  time { font: 500 13px/1.9 var(--font-mono); color: var(--color-text-secondary); }
+  .done time, .check { color: var(--color-brand-300); }
+  .check { font-weight: 700; }
+  @media (min-width: 800px) {
+    ol { grid-template-columns: 1fr 1fr; }
+    li:first-child { grid-column: 1 / -1; }
+  }
+</style>

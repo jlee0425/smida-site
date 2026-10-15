@@ -1,0 +1,36 @@
+---
+import { localeNames, locales, type Page } from '../i18n/ui';
+import { getLocale, pathFor, useT } from '../i18n/utils';
+
+interface Props {
+  page: Page;
+}
+const { page } = Astro.props;
+const current = getLocale(Astro.currentLocale);
+---
+<nav class="langs" aria-label={useT(current).a11y.language}>
+  {
+    locales.map((l, i) => (
+      <>
+        {i > 0 && <span aria-hidden="true">·</span>}
+        <a href={pathFor(l, page)} hreflang={l} lang={l} data-lang={l} aria-current={l === current ? 'true' : undefined}>
+          {localeNames[l]}
+        </a>
+      </>
+    ))
+  }
+</nav>
+<!-- Remember an explicit choice so `/` stops auto-redirecting by browser language. -->
+<script is:inline>
+  document.addEventListener('click', (e) => {
+    const a = e.target instanceof Element && e.target.closest('a[data-lang]');
+    if (a) try { localStorage.setItem('smida-lang', a.dataset.lang); } catch {}
+  });
+</script>
+
+<style>
+  .langs { display: flex; align-items: center; gap: 2px; font: 500 13px var(--font-mono); color: var(--color-text-muted); }
+  a { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; min-width: 40px; padding: 8px 10px; border: 1px solid transparent; border-radius: 999px; color: var(--color-text-secondary); text-decoration: none; }
+  a:hover { color: var(--color-text-primary); }
+  a[aria-current] { background: var(--color-surface-card); color: var(--color-text-primary); border-color: var(--color-border-default); font-weight: 700; }
+</style>

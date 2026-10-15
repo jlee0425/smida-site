@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "../assets/brand/archivo.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/700.css";
+
+:root { color-scheme: dark; }
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  html:lang(ko) body { word-break: keep-all; }
+  body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--color-surface), var(--color-bg-end)) var(--color-surface);
+    color: var(--color-text-primary);
+    font: 400 17px/1.6 var(--font-sans);
+    overflow-x: hidden;
+  }
+  a { color: var(--color-brand-300); }
+  main p a { text-decoration: underline; text-underline-offset: 3px; }
+  a:focus-visible, summary:focus-visible { outline: 3px solid var(--color-brand-300); outline-offset: 3px; border-radius: 6px; }
+  h2 { font: 700 13px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--color-text-muted); margin: 0 0 16px; }
+  section { padding: 32px 0; }
+}
+
+@layer components {
+  /* Wordmark: Archivo 800 at wdth 112, dotless ı with an orange diamond spark. */
+  .wm { font-family: "Archivo", sans-serif; font-weight: 800; font-variation-settings: "wdth" 112; letter-spacing: -.035em; line-height: .9; }
+  .ki { position: relative; display: inline-block; margin: 0 .03em; }
+  .ki::after { content: ""; position: absolute; left: 50%; top: .07em; width: .14em; height: .14em; background: var(--color-brand-500); transform: translateX(-50%) rotate(45deg); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 22px; border-radius: 14px; font-weight: 700; text-decoration: none; }
+  .btn-primary { background: var(--gradient-cta); color: var(--color-surface); }
+  .btn-secondary { background: var(--color-surface-card); color: var(--color-text-primary); border: 1px solid var(--color-border-default); }
+  .lead { font-size: clamp(19px, 4.6vw, 24px); line-height: 1.45; font-weight: 600; max-width: 40ch; margin: 0 0 20px; }
+  .page-h { font-size: clamp(32px, 9vw, 52px); line-height: 1.05; font-weight: 700; margin: 32px 0 12px; letter-spacing: -.02em; }
+  .cards { display: grid; gap: 10px; }
+  .cards li { background: var(--color-surface-card); border-radius: 14px; padding: 16px; }
+  .cards b { display: block; color: var(--color-text-primary); margin-bottom: 4px; }
+  .cards span { color: var(--color-text-secondary); }
+}

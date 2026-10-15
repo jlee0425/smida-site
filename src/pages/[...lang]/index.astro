@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Ctas from '../../components/Ctas.astro';
+import Values from '../../components/Values.astro';
+import Steps from '../../components/Steps.astro';
+import Milestones from '../../components/Milestones.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import MockToday from '../../components/mocks/MockToday.astro';
+import MockTimer from '../../components/mocks/MockTimer.astro';
+import MockPRs from '../../components/mocks/MockPRs.astro';
+import { getLocale, localeStaticPaths, useT } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+const t = useT(getLocale(Astro.currentLocale));
+---
+<BaseLayout page="">
+  <section class="pt-14 pb-12 md:pt-24 md:pb-18">
+    <h1 class="wm m-0 text-[clamp(88px,26vw,200px)]" aria-label="smida">sm<span class="ki">ı</span>da</h1>
+    <p class="mt-5 font-mono text-sm font-medium tracking-[.04em] text-brand-300" set:html={t.hero.story} />
+    <p class="mt-4 mb-8 max-w-[30ch] text-[clamp(20px,5vw,28px)] leading-[1.35] font-semibold">{t.hero.pitch}</p>
+    <Ctas />
+  </section>
+  <Values />
+  <section aria-labelledby="look">
+    <h2 id="look">{t.look.heading}</h2>
+    <div class="flex flex-wrap justify-center gap-6">
+      <MockToday />
+      <MockTimer />
+      <MockPRs />
+    </div>
+  </section>
+  <Steps />
+  <Milestones />
+  <CtaBand />
+</BaseLayout>

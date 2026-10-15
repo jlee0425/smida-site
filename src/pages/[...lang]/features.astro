@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Steps from '../../components/Steps.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import MockToday from '../../components/mocks/MockToday.astro';
+import MockShareCard from '../../components/mocks/MockShareCard.astro';
+import { getLocale, localeStaticPaths, useT } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+const t = useT(getLocale(Astro.currentLocale));
+---
+<BaseLayout page="features">
+  <h1 class="page-h">{t.features.heading}</h1>
+  <p class="lead">{t.features.lead}</p>
+  <section aria-labelledby="what">
+    <h2 id="what">{t.features.what}</h2>
+    <ul class="cards md:grid-cols-2">
+      {t.features.items.map((f) => <li><b>{f.title}</b><span>{f.body}</span></li>)}
+    </ul>
+  </section>
+  <section aria-labelledby="look">
+    <h2 id="look">{t.look.heading}</h2>
+    <div class="flex flex-wrap justify-center gap-6">
+      <MockToday />
+      <MockShareCard />
+    </div>
+  </section>
+  <Steps />
+  <CtaBand />
+</BaseLayout>

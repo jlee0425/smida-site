@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { defaultLocale, locales, ogLocale, type Page } from '../i18n/ui';
+import { getLocale, pathFor, useT } from '../i18n/utils';
+
+interface Props {
+  page: Page;
+}
+const { page } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const { title, description } = useT(locale).meta[page];
+const url = (l: typeof locale) => new URL(pathFor(l, page), Astro.site).href;
+const canonical = url(locale);
+const ogImage = new URL('/og-image.png', Astro.site).href;
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    {
+      /* GitHub Pages can't redirect on Accept-Language: on `/` only, send ja / ko browsers to their locale
+         unless the visitor picked a language in the switcher. Without JS the page is simply English. */
+      page === '' && locale === defaultLocale && (
+        <script is:inline>
+          try {
+            let l = localStorage.getItem('smida-lang');
+            if (!l) for (const n of navigator.languages || [navigator.language]) {
+              const m = /^(en|ja|ko)\b/i.exec(n || '');
+              if (m) { l = m[1].toLowerCase(); break; }
+            }
+            if (l === 'ja' || l === 'ko') location.replace('/' + l + '/');
+          } catch {}
+        </script>
+      )
+    }
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#141216" />
+    <link rel="canonical" href={canonical} />
+    {locales.map((l) => <link rel="alternate" hreflang={l} href={url(l)} />)}
+    <link rel="alternate" hreflang="x-default" href={url(defaultLocale)} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Smida" />
+    <meta property="og:locale" content={ogLocale[locale]} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="smida: Swedish for to forge. Functional fitness and hybrid race log." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body>
+    <div class="mx-auto max-w-[1040px] px-4">
+      <Header page={page} />
+      <main><slot /></main>
+      <Footer />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+---
+import LangSwitch from './LangSwitch.astro';
+import type { Page } from '../i18n/ui';
+import { getLocale, pathFor, useT } from '../i18n/utils';
+
+interface Props {
+  page: Page;
+}
+const { page } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const t = useT(locale);
+const links = (['features', 'about', 'support'] as const).map((p) => ({ p, href: pathFor(locale, p), label: t.nav[p] }));
+---
+<header class="flex flex-wrap items-center justify-between gap-2 py-4">
+  <a class="wm text-[28px] text-text-primary no-underline" href={pathFor(locale, '')}>sm<span class="ki">ı</span>da</a>
+  <nav
+    class="order-3 flex basis-full gap-1 border-t border-border-subtle pt-2 md:order-none md:ml-auto md:mr-2 md:basis-auto md:border-0 md:pt-0"
+    aria-label={t.a11y.main}
+  >
+    {
+      links.map(({ p, href, label }) => (
+        <a
+          href={href}
+          aria-current={p === page ? 'page' : undefined}
+          class="inline-flex min-h-10 items-center rounded-lg px-2.5 py-2 text-[15px] font-semibold text-text-secondary no-underline first:pl-0 aria-[current=page]:text-text-primary aria-[current=page]:underline aria-[current=page]:decoration-brand-500 aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[6px]"
+        >
+          {label}
+        </a>
+      ))
+    }
+  </nav>
+  <LangSwitch page={page} />
+</header>

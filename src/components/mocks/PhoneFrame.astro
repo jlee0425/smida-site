@@ -1,0 +1,14 @@
+---
+import '../../styles/mocks.css';
+interface Props {
+  caption: string;
+}
+const { caption } = Astro.props;
+---
+<figure class="m-0 grid justify-items-center gap-2.5">
+  <div class="phone" aria-hidden="true">
+    <div class="ph-bar"><span>9:41</span><span>●●● ▮</span></div>
+    <slot />
+  </div>
+  <figcaption class="max-w-[250px] text-center text-sm text-text-secondary">{caption}</figcaption>
+</figure>

@@ -1,0 +1,16 @@
+---
+import { getLocale, useT } from '../i18n/utils';
+const { how } = useT(getLocale(Astro.currentLocale));
+---
+<section aria-labelledby="how">
+  <h2 id="how">{how.heading}</h2>
+  <ol class="cards steps md:grid-cols-4">
+    {how.steps.map((s) => <li><div><b>{s.title}</b><span>{s.body}</span></div></li>)}
+  </ol>
+</section>
+
+<style>
+  .steps { counter-reset: s; }
+  li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 12px; }
+  li::before { content: counter(s, decimal-leading-zero); font: 700 20px/1.4 var(--font-mono); color: var(--color-brand-300); }
+</style>

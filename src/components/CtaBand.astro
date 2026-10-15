@@ -1,0 +1,9 @@
+---
+import Ctas from './Ctas.astro';
+import { getLocale, useT } from '../i18n/utils';
+const t = useT(getLocale(Astro.currentLocale));
+---
+<section class="my-6 rounded-[20px] bg-surface-card px-5 py-6" aria-label={t.a11y.getInvolved}>
+  <p class="mb-4 text-[clamp(20px,5vw,26px)] font-bold">{t.cta.band}</p>
+  <Ctas />
+</section>

@@ -1,0 +1,20 @@
+---
+import '../../styles/mocks.css';
+import { getLocale, useT } from '../../i18n/utils';
+const { look } = useT(getLocale(Astro.currentLocale));
+---
+<figure class="m-0 grid justify-items-center gap-2.5">
+  <div class="card" aria-hidden="true">
+    <span class="ph-sub !text-brand-300">FOR TIME</span>
+    <b class="text-[22px]">Fran</b>
+    <div class="score my-1.5 text-[64px]">3:28</div>
+    <div class="chips"><span class="chip rx">RX'd</span><span class="chip pr">PR −0:14</span></div>
+    <span class="ph-dim text-[13px]">21-15-9 · Thrusters, Pull-ups</span>
+    <span class="wm mt-auto text-[26px] text-text-primary">sm<span class="ki">ı</span>da</span>
+  </div>
+  <figcaption class="max-w-[250px] text-center text-sm text-text-secondary">{look.share}</figcaption>
+</figure>
+
+<style>
+  .card { width: 230px; aspect-ratio: 9 / 16; border-radius: 22px; background: radial-gradient(120% 70% at 80% 0%, #3a1d12, transparent 60%), linear-gradient(180deg, var(--color-surface-elevated), var(--color-bg-end)); border: 1px solid var(--color-border-default); padding: 22px 18px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 20px 50px rgb(0 0 0 / .45); }
+</style>

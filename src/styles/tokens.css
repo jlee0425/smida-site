@@ -1,0 +1,85 @@
+/*
+ * Source of truth: the Smida app's design tokens (src/components/ds/tokens.ts).
+ * This file is generated / synced from it once the app adopts Brand v3 (#453); edit there, not here.
+ *
+ * Naming: app camelCase -> CSS kebab-case (surfaceCard -> --color-surface-card, typeScale.xsTight -> --text-xs-tight).
+ * Everything in @theme is also a Tailwind utility (bg-surface-card, text-text-secondary, rounded-xl, text-lg, p-4 …).
+ */
+@theme {
+  /* brand */
+  --color-brand-300: #ff9a5c;
+  --color-brand-400: #ff7a2e;
+  --color-brand-500: #ff6a2b;
+  --color-brand-600: #e8401f;
+
+  /* surfaces */
+  --color-surface: #141216;
+  --color-surface-elevated: #1d1a21;
+  --color-surface-card: #242027;
+  --color-bg-end: #0e0d10;
+
+  /* text */
+  --color-text-primary: #f3eee8;
+  --color-text-secondary: #b3abb6;
+  --color-text-muted: #8c8590;
+
+  /* borders */
+  --color-border-subtle: #2c2730;
+  --color-border-default: #3a343f;
+  --color-bezel: #2a252e;
+
+  /* status */
+  --color-pr: #f2b632;
+  --color-rx: #b8f25a;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+
+  /* fonts */
+  --font-sans: "Archivo", "Hiragino Sans", "Noto Sans JP", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* spacing: app spacing(units) = units * 4 px, same as Tailwind's base step */
+  --spacing: 4px;
+
+  /* radius (app `radius`) */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-xxl: 16px;
+  --radius-full: 9999px;
+
+  /* type scale (app `typeScale`) */
+  --text-xxxs: 10px;
+  --text-xxxs--line-height: 14px;
+  --text-xxs: 11px;
+  --text-xxs--line-height: 14px;
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-xs-tight: 13px;
+  --text-xs-tight--line-height: 18px;
+  --text-sm: 14px;
+  --text-sm--line-height: 20px;
+  --text-base: 16px;
+  --text-base--line-height: 24px;
+  --text-lg: 18px;
+  --text-lg--line-height: 28px;
+  --text-xl: 20px;
+  --text-xl--line-height: 28px;
+  --text-xxl: 24px;
+  --text-xxl--line-height: 32px;
+  --text-xxxl: 30px;
+  --text-xxxl--line-height: 36px;
+  --text-display: 56px;
+  --text-display--line-height: 60px;
+}
+
+/* gradients (app `gradients`): plain custom properties, Tailwind has no gradient token namespace */
+:root {
+  --gradient-cta: linear-gradient(135deg, var(--color-brand-400), var(--color-brand-600));
+  --gradient-pr: linear-gradient(135deg, #ffe58f, var(--color-pr));
+  --gradient-for-time: linear-gradient(135deg, #ffb25c, var(--color-brand-500));
+  --gradient-amrap: linear-gradient(135deg, #c9a6ff, #a77bff);
+  --gradient-emom: linear-gradient(135deg, #7fe3f0, #1fb5cc);
+  --gradient-tabata: linear-gradient(135deg, #8ef0be, #3fcf8e);
+}
