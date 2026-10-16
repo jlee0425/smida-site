@@ -114,8 +114,8 @@ const en: Dict = {
     bug: { title: 'Report a bug', body: 'Include your phone model, the app version and what you tapped right before.', link: 'Send a bug report' },
     faqHeading: 'Common questions',
     faq: [
-      { q: 'Which timers does Smida have?', a: 'For Time (with an optional time cap), AMRAP, EMOM (every minute, or every N:NN such as every 2:30), Tabata and Death By. Each starts with a count-in. When it ends, tap Log Result and the score is filled in for you.' },
-      { q: "Why isn't my result counting as a PR?", a: 'A workout PR only comes from a result linked to a benchmark or a saved workout. If you logged it without a link, edit the session and link the workout: it then shows up in your PR Book. Team and partner results never count toward a PR. Lift PRs come straight from the sets you log.' },
+      { q: 'Which timers does Smida have?', a: 'For Time (with an optional time cap), AMRAP, EMOM (every minute, or every N:NN such as every 2:30), Tabata and Death By. Each starts with a count-in. When a timer finishes, tap Log Result to open Quick Log with what the timer knows already filled in: your time for For Time, your rounds for AMRAP, the minutes you completed for Death By. EMOM and Tabata open with the score blank for you to enter.' },
+      { q: "Why isn't my result counting as a PR?", a: 'A workout PR only comes from a result linked to a benchmark or a saved workout. If you logged it without a link, open the session, tap Edit, choose the workout and save: it then counts toward your PR Book. Team results (Team of 2 or 3) are kept out of your solo PRs. Lift PRs come straight from the sets you log.' },
       { q: 'What do RX+, RX and Scaled mean here?', a: "They're the scale you did the workout at. RX is as prescribed; RX+ is heavier or harder; Scaled is anything adjusted down. PRs are kept separately for each scale." },
       { q: 'Can I edit or delete a session?', a: 'Yes. Open the session from Home or All Activity, then tap Edit to change it, or Delete Session at the bottom to remove it.' },
       { q: 'How do I delete my account or my data?', a: "There is no account. Your data lives only on your phone and is never sent to a server, so deleting the app deletes it. Backup files you exported are yours: they stay wherever you saved them until you delete them." },
@@ -245,8 +245,8 @@ const ja: Dict = {
     bug: { title: 'バグの報告', body: 'スマホの機種、アプリのバージョン、直前に何をタップしたかを添えてもらえると助かります。', link: 'バグを報告する' },
     faqHeading: 'よくある質問',
     faq: [
-      { q: 'どんなタイマーがありますか？', a: 'For Time（タイムキャップも設定可）、AMRAP、EMOM（毎分のほか「2:30ごと」のような間隔も）、Tabata、デスバイの5種類です。どれもカウントインから始まり、終わったら「結果を記録」をタップするだけで、スコアが入った状態で記録画面が開きます。' },
-      { q: '結果が自己ベストにならないのはなぜ？', a: 'WODの自己ベストになるのは、ベンチマークか保存したワークアウトにリンクした結果だけです。リンクせずに記録したときは、セッションを編集してワークアウトをリンクすれば、PRブックに反映されます。チームやパートナーでの結果は自己ベストに含まれません。リフトの自己ベストは、記録したセットからそのまま計算されます。' },
+      { q: 'どんなタイマーがありますか？', a: 'For Time（タイムキャップも設定可）、AMRAP、EMOM（毎分のほか「2:30ごと」のような間隔も）、Tabata、デスバイの5種類です。どれもカウントインから始まります。終わったら「結果を記録」をタップすると、タイマーでわかっている分が入力された状態でクイックログが開きます。For Timeはタイム、AMRAPはラウンド数、デスバイはクリアできた分数。EMOMとTabataはスコアが空欄のまま開くので、自分で入力してください。' },
+      { q: '結果が自己ベストにならないのはなぜ？', a: 'WODの自己ベストになるのは、ベンチマークか保存したワークアウトにリンクした結果だけです。リンクせずに記録したときは、セッションを開いて「編集」をタップし、ワークアウトを選んで保存してください。そこからPRブックに反映されます。チーム（2人・3人）での結果は、個人の自己ベストには含まれません。リフトの自己ベストは、記録したセットからそのまま計算されます。' },
       { q: 'RX+・RX・スケールの違いは？', a: 'そのWODをどの強度でやったかを表します。RXは指定どおり、RX+は指定より重い・難しい内容、スケールは重量や動きを調整した場合です。自己ベストはスケールごとに別々に残ります。' },
       { q: 'セッションを編集・削除するには？', a: 'ホームか「すべてのアクティビティ」からセッションを開き、「編集」で修正できます。消したいときは、画面のいちばん下にある「セッションを削除」から。' },
       { q: 'アカウントやデータを削除したい', a: 'Smidaにはアカウントがありません。データはスマホの中にしかなく、どこかのサーバーに送られることもないので、アプリを削除すればデータも一緒に消えます。書き出したバックアップファイルはご自身で保存したものなので、不要になったらそのファイルを削除してください。' },
@@ -375,8 +375,8 @@ const ko: Dict = {
     bug: { title: '버그 제보', body: '기종, 앱 버전, 문제가 생기기 직전에 누른 버튼을 함께 적어 주시면 큰 도움이 됩니다.', link: '버그 제보하기' },
     faqHeading: '자주 묻는 질문',
     faq: [
-      { q: '어떤 타이머가 있나요?', a: 'For Time(타임캡 설정 가능), AMRAP, EMOM(매분, 또는 2:30마다 같은 간격), Tabata, 데스 바이까지 5가지입니다. 모두 카운트다운으로 시작하고, 끝난 뒤 ‘결과 기록’을 누르면 점수가 미리 채워진 채로 기록 화면이 열립니다.' },
-      { q: '왜 제 기록이 PR로 잡히지 않나요?', a: '와드 PR은 벤치마크나 저장한 운동에 연결된 결과만 인정됩니다. 연결 없이 기록했다면 세션을 편집해서 운동을 연결해 주세요. 그러면 PR 북에 반영됩니다. 팀·파트너 기록은 PR에 들어가지 않습니다. 리프트 PR은 기록한 세트에서 바로 계산됩니다.' },
+      { q: '어떤 타이머가 있나요?', a: 'For Time(타임캡 설정 가능), AMRAP, EMOM(매분, 또는 2:30마다 같은 간격), Tabata, 데스 바이까지 5가지입니다. 모두 카운트다운으로 시작합니다. 타이머가 끝나면 ‘결과 기록’을 누르세요. 타이머가 아는 값이 미리 채워진 채로 퀵 로그가 열립니다. For Time은 시간, AMRAP은 라운드 수, 데스 바이는 완료한 분 수가 들어갑니다. EMOM과 Tabata는 점수 칸이 비어 있으니 직접 입력하면 됩니다.' },
+      { q: '왜 제 기록이 PR로 잡히지 않나요?', a: '와드 PR은 벤치마크나 저장한 운동에 연결된 결과만 인정됩니다. 연결 없이 기록했다면 세션을 열고 ‘편집’을 눌러 운동을 고른 뒤 저장하세요. 그때부터 PR 북에 반영됩니다. 팀(2인·3인) 기록은 개인 PR에 들어가지 않습니다. 리프트 PR은 기록한 세트에서 바로 계산됩니다.' },
       { q: 'RX+, RX, 스케일은 무슨 뜻인가요?', a: '그 와드를 어떤 강도로 했는지를 나타냅니다. RX는 처방 그대로, RX+는 처방보다 무겁거나 어렵게, 스케일은 무게나 동작을 조절한 경우입니다. PR은 스케일별로 따로 남습니다.' },
       { q: '세션을 수정하거나 지우려면요?', a: '홈이나 ‘전체 활동’에서 세션을 열고 ‘편집’을 누르면 수정할 수 있습니다. 지우려면 화면 맨 아래 ‘세션 삭제’를 누르세요.' },
       { q: '계정이나 데이터는 어떻게 삭제하나요?', a: 'Smida에는 계정이 없습니다. 데이터는 휴대폰 안에만 있고 어떤 서버로도 전송되지 않기 때문에, 앱을 삭제하면 데이터도 함께 지워집니다. 내보낸 백업 파일은 직접 저장해 둔 파일이니, 필요 없다면 그 파일을 지우면 됩니다.' },
