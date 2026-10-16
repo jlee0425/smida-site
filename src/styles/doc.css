@@ -1,0 +1,36 @@
+/* Doc pages (Support; the Privacy draft): design v2 site.css "doc pages". Colours come from tokens.css. */
+.doc { max-width: 760px; margin: 0 auto; padding: 64px 20px 96px; }
+.doc h1 { font-size: clamp(52px, 8vw, 88px); margin: 16px 0 18px; }
+.doc .meta { font: 400 13px/1.5 var(--font-mono); color: var(--color-text-muted); margin: 0; }
+.doc .intro { font-size: 20px; color: var(--color-text-secondary); margin: 24px 0 0; text-wrap: pretty; }
+.doc h2 { font: 700 22px/1.3 var(--font-sans); letter-spacing: 0; text-transform: none; margin: 56px 0 14px; color: var(--color-text-primary); }
+.doc p, .doc li { color: var(--color-text-secondary); text-wrap: pretty; margin: 0; }
+.doc p + p { margin-top: 12px; }
+.doc ul { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; margin: 0; }
+.doc li::marker { color: var(--color-brand-500); }
+.doc strong { color: var(--color-text-primary); font-weight: 600; }
+.draft { display: flex; gap: 12px; align-items: flex-start; border: 1.5px solid var(--color-warning); color: var(--color-warning); border-radius: 12px; padding: 14px 16px; font: 400 13px/1.5 var(--font-mono); margin-top: 32px; }
+.draft::before { content: "⚠"; font: 700 15px/1.3 var(--font-sans); }
+.fill { color: var(--color-warning); font-family: var(--font-mono); font-size: .88em; }
+
+.contact { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 40px; }
+.contact > div { padding: 22px; border-radius: 12px; background: linear-gradient(135deg, var(--color-surface-elevated), var(--color-surface-card)); border: 1px solid var(--color-border-subtle); display: flex; flex-direction: column; gap: 8px; }
+.contact h3 { font: 700 17px/1.3 var(--font-sans); margin: 0; }
+.contact p { font-size: 15px; }
+.doc .contact a.mail { font: 500 15px/1.3 var(--font-mono); margin-top: auto; padding-top: 8px; color: var(--color-brand-500); text-decoration: none; }
+.doc .contact a.mail:hover { color: var(--color-brand-300); }
+
+.faq { margin-top: 8px; }
+.faq details { border-top: 1px solid var(--color-border-subtle); padding: 20px 0; }
+.faq details:last-child { border-bottom: 1px solid var(--color-border-subtle); }
+.faq summary { font: 600 18px/1.35 var(--font-sans); cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 24px; color: var(--color-text-primary); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--color-brand-500); font-weight: 400; font-size: 22px; line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq details p { margin-top: 12px; max-width: 62ch; }
+html:lang(ja) .faq details p, html:lang(ko) .faq details p { max-width: 38em; }
+
+@media (min-width: 1001px) {
+  .doc { padding: 96px 32px 120px; }
+  .contact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

@@ -44,3 +44,10 @@
   .cards b { display: block; color: var(--color-text-primary); margin-bottom: 4px; }
   .cards span { color: var(--color-text-secondary); }
 }
+
+/* Display headline + mono kicker (design v2), shared by home and the doc pages. */
+.disp { font-family: "Archivo", var(--font-sans); font-weight: 800; font-variation-settings: "wdth" 112; letter-spacing: -.03em; line-height: .94; text-wrap: balance; color: var(--color-text-primary); text-transform: none; margin: 0; }
+html:lang(ja) .disp, html:lang(ko) .disp { letter-spacing: -.01em; line-height: 1.12; }
+.kicker { font: 500 13px/1.4 var(--font-mono); color: var(--color-brand-500); letter-spacing: .08em; text-transform: uppercase; margin: 0; }
+/* Japanese headlines break between phrases, never inside a word (Chromium; others fall back to balance). */
+html:lang(ja) .disp { word-break: auto-phrase; }

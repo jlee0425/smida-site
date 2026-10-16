@@ -27,7 +27,7 @@ const join = 'mailto:hello@smida.fit?subject=Smida%20beta';
           <span class="wm" aria-hidden="true">sm<span class="ki">ı</span>da</span>
         </div>
         <p class="kicker">{h.kicker}</p>
-        <h1 class="disp">{h.title}</h1>
+        <h1 class="disp" set:html={h.title} />
         <p class="lede">{h.lede}</p>
         <div class="join">
           <a class="btn btn-primary" href={join}>{h.join}</a>

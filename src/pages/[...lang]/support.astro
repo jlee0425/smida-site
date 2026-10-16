@@ -1,24 +1,40 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLocale, localeStaticPaths, useT } from '../../i18n/utils';
+import '../../styles/doc.css';
 
 export function getStaticPaths() {
   return localeStaticPaths();
 }
-const { support } = useT(getLocale(Astro.currentLocale));
+const { support: s } = useT(getLocale(Astro.currentLocale));
 ---
-<BaseLayout page="support">
-  <div class="max-w-[720px] pt-4 pb-12">
-    <h1 class="page-h">{support.heading}</h1>
-    {
-      support.faq.map((f, i) => (
-        <details open={i === 0} class="my-2.5 rounded-[14px] bg-surface-card px-4 py-3.5">
-          <summary class="cursor-pointer font-bold">{f.q}</summary>
-          <p class="mt-2" set:html={f.a} />
-        </details>
-      ))
-    }
-    <h2 class="mt-8">{support.contact}</h2>
-    <p><a href="mailto:hello@smida.fit">hello@smida.fit</a></p>
+<BaseLayout page="support" bare>
+  <div class="doc">
+    <p class="kicker">{s.kicker}</p>
+    <h1 class="disp">{s.heading}</h1>
+    <p class="intro">{s.intro}</p>
+    <div class="contact">
+      <div>
+        <h3>{s.help.title}</h3>
+        <p>{s.help.body}</p>
+        <a class="mail" href="mailto:hello@smida.fit">hello@smida.fit</a>
+      </div>
+      <div>
+        <h3>{s.bug.title}</h3>
+        <p>{s.bug.body}</p>
+        <a class="mail" href="mailto:hello@smida.fit?subject=Smida%20bug%20report">{s.bug.link}</a>
+      </div>
+    </div>
+    <h2>{s.faqHeading}</h2>
+    <div class="faq">
+      {
+        s.faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p set:html={f.a} />
+          </details>
+        ))
+      }
+    </div>
   </div>
 </BaseLayout>

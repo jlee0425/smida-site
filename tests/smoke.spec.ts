@@ -104,3 +104,28 @@ test('dist/ has no banned words and no unpublished drafts', () => {
   expect(hits).toEqual([]);
   expect(files.some((f) => /privacy|terms/.test(f))).toBe(false);
 });
+
+for (const locale of locales) {
+  test(`support: design v2 layout, contact cards mail hello@ and the FAQ opens (${locale})`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(pathFor(locale, 'support'));
+    await expect(page.locator('main .doc h1.disp')).toHaveCount(1);
+    const mails = await page.locator('.contact a.mail').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+    expect(mails).toEqual(['mailto:hello@smida.fit', 'mailto:hello@smida.fit?subject=Smida%20bug%20report']);
+    const faq = page.locator('.faq details');
+    await expect(faq).toHaveCount(7);
+    await faq.first().locator('summary').click();
+    await expect(faq.first().locator('p')).toBeVisible();
+    // The header button is the beta mailto, not a waitlist.
+    await page.setViewportSize({ width: 1200, height: 800 });
+    await expect(page.locator('header a.btn')).toHaveAttribute('href', 'mailto:hello@smida.fit?subject=Smida%20beta');
+  });
+}
+
+test('dist/ never mentions an address that does not exist', () => {
+  const files: string[] = [];
+  const walk = (d: string) => readdirSync(d).forEach((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : files.push(join(d, f))));
+  walk('dist');
+  const hits = files.filter((f) => f.endsWith('.html') && /(support|privacy)@smida\.fit|waitlist/i.test(readFileSync(f, 'utf8')));
+  expect(hits).toEqual([]);
+});
