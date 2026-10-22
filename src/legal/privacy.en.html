@@ -1,7 +1,7 @@
 <p class="kicker">Legal</p>
 <h1 class="disp">Privacy</h1>
 <p class="meta">Effective and last updated 22 October 2026 · Developer: LEE JEONGKYU</p>
-<p class="intro">Smida is a training log with no account and no server. What you log stays on your phone. This policy explains what the app keeps there, the one thing that leaves it on its own, and how you stay in control.</p>
+<p class="intro">Smida is a training log with no account and no server. What you log stays on your phone. This policy explains what the app keeps there, the two things that can leave it on their own, and how you stay in control.</p>
 <h2>Who we are</h2>
 <p>Smida is made by LEE JEONGKYU, an individual developer, who is responsible for your personal information under this policy (the controller under EU and UK law). Contact: <a href="mailto:hello@smida.fit">hello@smida.fit</a>. A postal address is given without delay on request.</p>
 <h2>What the app keeps on your phone</h2>
@@ -15,16 +15,17 @@
 </ul>
 <h2>How it's used</h2>
 <p>Only to run the app for you on your phone: to show your log, work out your PRs and progress, add watch stats to your sessions, show your weight trend, read workouts from whiteboard photos, and make share cards and exports when you ask. Nothing is used for advertising, profiling or training AI models.</p>
-<p>Under EU and UK law, our legal basis for the ML Kit metrics below and for handling email you send us is legitimate interest: keeping the scan feature working and secure, and answering you.</p>
+<p>Under EU and UK law, our legal basis for the ML Kit metrics and crash reports below and for handling email you send us is legitimate interest: keeping the scan feature and the app working and secure, fixing crashes, and answering you.</p>
 <h2>Health Connect</h2>
 <p>If you allow it, Smida reads heart rate, exercise sessions, active calories, steps and weight from Health Connect. Access is read-only: Smida never writes to Health Connect. It reads only while you use the app, for example when you log or open a session, link it to a watch workout or refresh its stats, open Progress, or import your weight.</p>
 <p>For a linked session, Smida keeps the average and maximum heart rate with a heart-rate graph, steps, active calories, the watch workout's start and end times and title, and the app and device that recorded it. For weight, it keeps each reading's value and time.</p>
 <p>This data is used only to show these stats in Smida. It is never used for advertising, never sold, never transferred to anyone by Smida, and never used to decide credit, insurance or employment. It stays on your phone unless you export a backup yourself, which includes the stats saved with your sessions. The developer has no access to it. Smida's use of it follows the <a href="https://support.google.com/googleplay/android-developer/answer/12991134" rel="noopener">Health Connect permissions policy</a>, including its Limited Use requirements.</p>
 <p>You can turn off any of these permissions at any time in Health Connect's app permissions. Stats already saved are kept with their session on your phone; Erase all data or uninstalling removes them (deleting a session only hides them, see below).</p>
 <h2>What leaves your phone</h2>
-<p>Smida has no server and sends nothing to the developer. One thing leaves your phone without you sending it:</p>
+<p>Smida has no server of its own. Two things can leave your phone without you sending them:</p>
 <ul>
 <li>Whiteboard scanning uses Google ML Kit on your phone. The photo and the text read from it never leave your phone. ML Kit sends Google technical metrics about the scan feature, such as device model and OS, app version, an app-installation identifier, speed, image format and size, and error codes. Google uses them to maintain the feature and detect misuse. Scan is optional: before your first scan the app tells you about these metrics and lets you choose not to use it, and you can turn it off in Settings → Movements &amp; scanning → Scan. If you never use Scan, nothing is sent to Google; once you switch it off, Scan sends nothing new. See the <a href="https://developers.google.com/ml-kit/terms" rel="noopener">ML Kit terms</a> and the <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>.</li>
+<li>Crash reports. When the app crashes, stops responding or hits an error, it sends a report to Sentry, a crash-reporting service run by Functional Software, Inc. (United States, US data region), so the developer can find and fix the bug. A report holds the error and where in the code it happened (the stack trace), the app version and build, the phone's maker, model and processor type, the OS version, and the names of the screens opened just before it. When the app's native code crashes or the app stops responding, Sentry's Android library writes the report itself and also adds: the native error message, whether the app was in the foreground, the phone's language and time zone, screen size, total memory, processor, OS build and kernel version, when the phone was last started, which permissions Smida has been granted (such as the camera or Health Connect), and a random identifier Sentry creates for this installation. It never holds your workouts, notes or anything you typed, and there is no account to link it to. Sentry is set not to store your IP address. Crash reports are on by default: turn them off in Settings → About → Send crash reports, and nothing more is sent from then on. See the <a href="https://sentry.io/privacy/" rel="noopener">Sentry Privacy Policy</a>.</li>
 </ul>
 <p>Everything else leaves only when you choose:</p>
 <ul>
@@ -44,7 +45,7 @@
 <h2>What we don't do</h2>
 <ul>
 <li>No account and no sign-up: the developer has no copy of your data.</li>
-<li>No analytics or advertising of our own, and no crash-reporting service.</li>
+<li>No analytics and no advertising: crash reports (above) are the only diagnostics, and you can turn them off.</li>
 <li>No cookies, no tracking and no use of your advertising ID.</li>
 <li>We don't sell your data or share it for advertising.</li>
 </ul>
@@ -53,23 +54,32 @@
 <p>A CSV export holds your sessions, their movements and your PR Book, for a spreadsheet. Deleted items are left out. It is plain text too.</p>
 <p>You choose where each file goes: a folder on your phone, or any app in the share sheet, such as a cloud drive or email. Smida has no cloud storage of its own. Keep these files somewhere private, and send them only to people you'd show your health data to.</p>
 <h2>Security</h2>
-<p>Your data is protected by staying on your phone. It lives in Smida's private storage, which Android's app sandbox keeps out of reach of other apps. It is also left out of Android's cloud backup and phone-to-phone transfer. The ML Kit metrics travel over an encrypted (HTTPS) connection. Use a screen lock: it protects Smida's data along with everything else on your phone.</p>
+<p>Your data is protected by staying on your phone. It lives in Smida's private storage, which Android's app sandbox keeps out of reach of other apps. It is also left out of Android's cloud backup and phone-to-phone transfer. The ML Kit metrics and crash reports travel over an encrypted (HTTPS) connection. Use a screen lock: it protects Smida's data along with everything else on your phone.</p>
 <h2>Keeping and deleting your data</h2>
 <p>Your data stays on your phone until you delete it. When you delete a session or another item, it disappears from the app, but the record stays hidden in the app's database, and in any backup you export, until you erase all data or uninstall the app.</p>
-<p>To delete everything, go to Settings → Data &amp; Backup → Erase all data. It permanently deletes everything Smida stored on your phone, a tester code included. Uninstalling Smida does the same.</p>
+<p>To delete everything, go to Settings → Data &amp; Backup → Erase all data. It permanently deletes everything Smida stored on your phone, a tester code included, and keeps one choice: if you turned crash reports off, they stay off. Uninstalling Smida deletes everything.</p>
 <p>Neither touches what lives outside Smida: files you exported (backups, CSV files, share cards) stay where you saved them until you delete them, and Health Connect keeps its own data and the permission you gave Smida until you turn it off there.</p>
-<p>Email you send us is kept as described under "Email you send us". Google keeps the ML Kit metrics under its own policy; Smida can't see or delete them.</p>
+<p>Email you send us is kept as described under "Email you send us". Google keeps the ML Kit metrics under its own policy; Smida can't see or delete them. Sentry deletes crash reports after 30 days (never more than 90, whatever the plan).</p>
 <h2>Transfers outside your country</h2>
-<p>Smida itself transfers nothing abroad. Two things can reach companies in other countries. First, the ML Kit metrics:</p>
+<p>Smida itself transfers nothing abroad. Three things can reach companies in other countries. First, the ML Kit metrics:</p>
 <ul>
 <li><strong>Recipient</strong>: Google LLC (contact through the <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>).</li>
 <li><strong>Country</strong>: the United States, and other countries where Google runs servers.</li>
 <li><strong>What</strong>: the metrics listed under "What leaves your phone".</li>
 <li><strong>When and how</strong>: each time you use whiteboard scanning, over an encrypted connection.</li>
 <li><strong>Why and for how long</strong>: for Google to maintain ML Kit and detect misuse, kept under the Google Privacy Policy.</li>
-<li><strong>How to refuse</strong>: choose not to use Scan when the app asks, or turn it off in Settings → Movements &amp; scanning → Scan. You can type any workout instead, and nothing else in the app sends data.</li>
+<li><strong>How to refuse</strong>: choose not to use Scan when the app asks, or turn it off in Settings → Movements &amp; scanning → Scan. You can type any workout instead.</li>
 </ul>
-<p>Second, email you send us:</p>
+<p>Second, crash reports:</p>
+<ul>
+<li><strong>Recipient</strong>: Functional Software, Inc. d/b/a Sentry (contact compliance@sentry.io or through the <a href="https://sentry.io/privacy/" rel="noopener">Sentry Privacy Policy</a>).</li>
+<li><strong>Country</strong>: the United States (Sentry's US data region).</li>
+<li><strong>What</strong>: the items listed under "What leaves your phone".</li>
+<li><strong>When and how</strong>: when the app crashes, stops responding or hits an error, then or at the next launch, over an encrypted connection.</li>
+<li><strong>Why and for how long</strong>: to find and fix bugs in Smida; Sentry deletes them after 30 days (never more than 90).</li>
+<li><strong>How to refuse</strong>: turn off Settings → About → Send crash reports. Everything in the app works the same without it.</li>
+</ul>
+<p>Third, email you send us:</p>
 <ul>
 <li><strong>Recipients</strong>: Porkbun LLC, which forwards it, and Google LLC (Gmail), which stores it.</li>
 <li><strong>Country</strong>: the United States, and other countries where Google runs servers.</li>
@@ -78,8 +88,8 @@
 <li><strong>Why and for how long</strong>: to answer you; kept as described under "Email you send us".</li>
 <li><strong>How to refuse</strong>: don't write to us. Nothing in the app needs email.</li>
 </ul>
-<p>For the EU and UK: Google LLC is certified under the EU-U.S. Data Privacy Framework and its UK Extension. Email reaches other countries because you send it to us; that transfer is necessary to answer your request (GDPR Article 49(1)(b)).</p>
-<p>For Japan: the United States has no comprehensive federal privacy law like Japan's APPI, though some states have their own; Japan's Personal Information Protection Commission publishes a summary. Google describes the protections it applies in its Privacy Policy.</p>
+<p>For the EU and UK: Google LLC and Functional Software, Inc. (Sentry) are certified under the EU-U.S. Data Privacy Framework and its UK Extension. Email reaches other countries because you send it to us; that transfer is necessary to answer your request (GDPR Article 49(1)(b)).</p>
+<p>For Japan: the United States has no comprehensive federal privacy law like Japan's APPI, though some states have their own; Japan's Personal Information Protection Commission publishes a summary. Google and Sentry describe the protections they apply in their privacy policies.</p>
 <h2>Your rights</h2>
 <p>Because your data is on your phone, you can see, correct, export and delete it yourself at any time: edit or delete any entry, export a backup or CSV, or erase all data. For anything we hold, such as an email you sent, write to <a href="mailto:hello@smida.fit">hello@smida.fit</a>. We confirm it is you by replying to the address the request came from; a representative must send your signed authorisation. We reply within 10 days, free of charge.</p>
 <ul>
