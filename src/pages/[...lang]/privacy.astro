@@ -1,0 +1,18 @@
+---
+// The privacy policy: the same text as the app's bundled policy
+// (wodflow src/constants/privacy-policy/{en,ja,ko}.ts). Edit both together.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLocale, localeStaticPaths } from '../../i18n/utils';
+import en from '../../legal/privacy.en.html?raw';
+import ja from '../../legal/privacy.ja.html?raw';
+import ko from '../../legal/privacy.ko.html?raw';
+import '../../styles/doc.css';
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+const html = { en, ja, ko }[getLocale(Astro.currentLocale)];
+---
+<BaseLayout page="privacy" bare>
+  <article class="doc" set:html={html} />
+</BaseLayout>

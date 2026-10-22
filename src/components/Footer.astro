@@ -11,7 +11,7 @@ const t = useT(locale);
       <small class="font-mono text-[13px]">© 2026 Smida · smida.fit</small>
     </div>
     <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label={t.a11y.footer}>
-      {(['features', 'about', 'support'] as const).map((p) => <a class="text-text-secondary no-underline hover:text-text-primary" href={pathFor(locale, p)}>{t.nav[p]}</a>)}
+      {(['features', 'about', 'support', 'privacy'] as const).map((p) => <a class="text-text-secondary no-underline hover:text-text-primary" href={pathFor(locale, p)}>{t.nav[p]}</a>)}
       <a class="text-text-secondary no-underline hover:text-text-primary" href="https://instagram.com/smida_fit" rel="noopener">Instagram</a>
     </nav>
   </div>
