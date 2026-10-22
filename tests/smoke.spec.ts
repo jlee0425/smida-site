@@ -95,14 +95,19 @@ test.describe('without JS', () => {
 });
 
 test('dist/ has no banned words and no unpublished drafts', () => {
-  const banned = /crossfit|hyrox|strava|크로스핏|하이록스|스트라바|スミダ|스미다|health connect|ヘルスコネクト|헬스 커넥트|heart rate|心拍|심박|privacy\.html|terms\.html/i;
+  const banned = /crossfit|hyrox|strava|크로스핏|하이록스|스트라바|スミダ|스미다|privacy\.html|terms\.html/i;
+  // The privacy policy must name the Health Connect data the app reads (Play's Health Connect policy); no other page does.
+  const health = /health connect|ヘルスコネクト|헬스 커넥트|heart rate|心拍|심박/i;
   const files: string[] = [];
   const walk = (d: string) => readdirSync(d).forEach((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : files.push(join(d, f))));
   walk('dist');
   const text = files.filter((f) => /\.(html|xml|txt|css|js)$/.test(f));
-  const hits = text.filter((f) => banned.test(readFileSync(f, 'utf8')));
+  const hits = text.filter((f) => {
+    const t = readFileSync(f, 'utf8');
+    return banned.test(t) || (!/privacy/.test(f) && health.test(t));
+  });
   expect(hits).toEqual([]);
-  expect(files.some((f) => /privacy|terms/.test(f))).toBe(false);
+  expect(files.some((f) => /terms/.test(f))).toBe(false);
 });
 
 for (const locale of locales) {

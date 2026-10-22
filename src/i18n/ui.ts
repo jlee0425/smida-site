@@ -1,7 +1,7 @@
 export const locales = ['en', 'ja', 'ko'] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = 'en';
-export const pages = ['', 'features', 'about', 'support'] as const;
+export const pages = ['', 'features', 'about', 'support', 'privacy'] as const;
 export type Page = (typeof pages)[number];
 
 export const localeNames: Record<Locale, string> = { en: 'EN', ja: '日本語', ko: '한국어' };
@@ -24,7 +24,7 @@ type CardText = Record<
 
 export interface Dict {
   a11y: { main: string; footer: string; language: string; getInvolved: string; ogAlt: string };
-  nav: Record<'features' | 'about' | 'support', string>;
+  nav: Record<'features' | 'about' | 'support' | 'privacy', string>;
   cta: { follow: string; beta: string; band: string };
   meta: Record<Page, { title: string; description: string }>;
   hero: { story: string };
@@ -48,13 +48,14 @@ export interface Dict {
 
 const en: Dict = {
   a11y: { main: 'Main', footer: 'Footer', language: 'Language', getInvolved: 'Get involved', ogAlt: 'smida: Swedish for to forge. Functional fitness and hybrid race log.' },
-  nav: { features: 'Features', about: 'About', support: 'Support' },
+  nav: { features: 'Features', about: 'About', support: 'Support', privacy: 'Privacy' },
   cta: { follow: 'Follow @smida_fit', beta: 'Join the beta', band: 'Train with us from day one.' },
   meta: {
     '': { title: 'Smida: a training log for functional fitness', description: 'A training log for functional fitness and hybrid racing: timers, benchmarks, PRs. Built at a box in Tokyo.' },
     features: { title: 'Features · Smida', description: 'What Smida does: any WOD format, strength and 1RM PRs, box timers, PR history, offline on your device, share cards. EN, JA, KO.' },
     about: { title: 'About · Smida', description: 'Smida is a training log built by a member of a box in Tokyo: local-first, no account. Smida is Swedish for to forge.' },
     support: { title: 'Support · Smida', description: 'Smida help: the timers, how PRs count, where your data lives, backups, and how to join the beta.' },
+    privacy: { title: 'Privacy · Smida', description: 'What Smida keeps on your phone, the one thing that leaves it, Health Connect, backups, deletion and your rights.' },
   },
   hero: {
     story: 'smida — Swedish for <em>to forge</em>',
@@ -179,13 +180,14 @@ const en: Dict = {
 // same message and facts per section, native wording and structure (owner feedback 2026-10-16).
 const ja: Dict = {
   a11y: { main: 'メインメニュー', footer: 'フッターメニュー', language: '言語', getInvolved: 'ベータに参加', ogAlt: 'Smida。スウェーデン語で「鍛える」という名前の、ボックスでのトレーニングを記録するアプリ。' },
-  nav: { features: '機能', about: 'Smidaのこと', support: 'サポート' },
+  nav: { features: '機能', about: 'Smidaのこと', support: 'サポート', privacy: 'プライバシー' },
   cta: { follow: 'Instagramでフォロー', beta: 'ベータに参加', band: '最初のベータメンバーになりませんか。' },
   meta: {
     '': { title: 'Smida｜WODと自己ベストを残すトレーニングログ', description: 'クラスのWODも、ハイブリッドレースの練習も、その場でさっと記録。タイマー、ベンチマーク、自己ベストをひとつのアプリにまとめました。東京のボックスで生まれたトレーニングログです。' },
     features: { title: '機能｜Smida', description: 'どんな形式のWODも記録でき、1RMや自己ベストの履歴、ボックスで見やすいタイマー、シェア用の記録カードまで。オフラインで動き、日本語・英語・韓国語で使えます。' },
     about: { title: 'Smidaのこと｜東京のボックス生まれのトレーニングログ', description: '東京のボックスに通うメンバーが、自分の記録のためにつくり始めたアプリです。アカウント登録はなく、データはスマホの中だけ。Smidaはスウェーデン語で「鍛える」。' },
     support: { title: 'サポート｜Smida', description: 'タイマーの種類、自己ベストの仕組み、データの保存先とバックアップ、ベータへの参加方法。困ったときはこちらへ。' },
+    privacy: { title: 'プライバシーポリシー｜Smida', description: 'Smidaが端末に保存するもの、外に出るただ一つのもの、ヘルスコネクト、バックアップ、削除、ご本人の権利について。' },
   },
   hero: {
     story: 'smida は、スウェーデン語で「<em>鍛える</em>」',
@@ -309,13 +311,14 @@ const ja: Dict = {
 
 const ko: Dict = {
   a11y: { main: '주 메뉴', footer: '하단 메뉴', language: '언어', getInvolved: '베타 신청', ogAlt: 'Smida. 스웨덴어로 ‘단련하다’라는 이름의, 박스 운동을 기록하는 앱.' },
-  nav: { features: '기능', about: '소개', support: '도움말' },
+  nav: { features: '기능', about: '소개', support: '도움말', privacy: '개인정보 처리방침' },
   cta: { follow: '인스타그램 팔로우', beta: '베타 신청', band: '첫 베타 멤버가 되어 주세요.' },
   meta: {
     '': { title: 'Smida | 와드와 PR을 남기는 운동 기록 앱', description: '수업 와드부터 하이브리드 레이스 훈련까지, 운동 끝나고 바로 기록하세요. 타이머, 벤치마크, PR 관리를 앱 하나에 담았습니다. 도쿄의 한 박스에서 태어난 운동 기록 앱입니다.' },
     features: { title: '기능 | Smida', description: '어떤 형식의 와드든 기록하고, 1RM과 PR 히스토리, 박스에서 잘 보이는 타이머, 공유용 기록 카드까지. 인터넷 없이 작동하고 한국어·일본어·영어를 지원합니다.' },
     about: { title: '소개 | Smida', description: '도쿄의 한 박스 회원이 자기 기록을 남기려고 만들기 시작한 앱입니다. 가입 없이 쓰고, 데이터는 휴대폰에만 남습니다. Smida는 스웨덴어로 ‘단련하다’라는 뜻입니다.' },
     support: { title: '도움말 | Smida', description: '타이머 종류, PR이 잡히는 기준, 데이터 저장 위치와 백업, 베타 신청 방법까지. 궁금한 점은 여기서 확인하세요.' },
+    privacy: { title: '개인정보 처리방침 | Smida', description: 'Smida가 휴대폰에 저장하는 정보, 밖으로 나가는 단 한 가지, 헬스 커넥트, 백업, 삭제, 정보주체의 권리.' },
   },
   hero: {
     story: 'smida는 스웨덴어로 ‘<em>단련하다</em>’',
