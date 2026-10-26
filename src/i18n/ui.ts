@@ -55,7 +55,7 @@ const en: Dict = {
     features: { title: 'Features · Smida', description: 'What Smida does: any WOD format, strength and 1RM PRs, box timers, PR history, offline on your device, share cards. EN, JA, KO.' },
     about: { title: 'About · Smida', description: 'Smida is a training log built by a member of a box in Tokyo: local-first, no account. Smida is Swedish for to forge.' },
     support: { title: 'Support · Smida', description: 'Smida help: the timers, how PRs count, where your data lives, backups, and how to join the beta.' },
-    privacy: { title: 'Privacy · Smida', description: 'What Smida keeps on your phone, the one thing that leaves it, Health Connect, backups, deletion and your rights.' },
+    privacy: { title: 'Privacy · Smida', description: 'What Smida keeps on your phone, what can leave it, Health Connect, backups, deletion and your rights.' },
   },
   hero: {
     story: 'smida — Swedish for <em>to forge</em>',
@@ -193,7 +193,7 @@ const ja: Dict = {
     features: { title: '機能｜Smida', description: 'どんな形式のWODも記録でき、1RMや自己ベストの履歴、ボックスで見やすいタイマー、シェア用の記録カードまで。オフラインで動き、日本語・英語・韓国語で使えます。' },
     about: { title: 'Smidaのこと｜東京のボックス生まれのトレーニングログ', description: '東京のボックスに通うメンバーが、自分の記録のためにつくり始めたアプリです。アカウント登録はなく、データはスマホの中だけ。Smidaはスウェーデン語で「鍛える」。' },
     support: { title: 'サポート｜Smida', description: 'タイマーの種類、自己ベストの仕組み、データの保存先とバックアップ、ベータへの参加方法。困ったときはこちらへ。' },
-    privacy: { title: 'プライバシーポリシー｜Smida', description: 'Smidaが端末に保存するもの、外に出るただ一つのもの、ヘルスコネクト、バックアップ、削除、ご本人の権利について。' },
+    privacy: { title: 'プライバシーポリシー｜Smida', description: 'Smidaが端末に保存するもの、外に出ることがあるもの、ヘルスコネクト、バックアップ、削除、ご本人の権利について。' },
   },
   hero: {
     story: 'smida は、スウェーデン語で「<em>鍛える</em>」',
@@ -330,7 +330,7 @@ const ko: Dict = {
     features: { title: '기능 | Smida', description: '어떤 형식의 와드든 기록하고, 1RM과 PR 히스토리, 박스에서 잘 보이는 타이머, 공유용 기록 카드까지. 인터넷 없이 작동하고 한국어·일본어·영어를 지원합니다.' },
     about: { title: '소개 | Smida', description: '도쿄의 한 박스 회원이 자기 기록을 남기려고 만들기 시작한 앱입니다. 가입 없이 쓰고, 데이터는 휴대폰에만 남습니다. Smida는 스웨덴어로 ‘단련하다’라는 뜻입니다.' },
     support: { title: '도움말 | Smida', description: '타이머 종류, PR이 잡히는 기준, 데이터 저장 위치와 백업, 베타 신청 방법까지. 궁금한 점은 여기서 확인하세요.' },
-    privacy: { title: '개인정보 처리방침 | Smida', description: 'Smida가 휴대폰에 저장하는 정보, 밖으로 나가는 단 한 가지, 헬스 커넥트, 백업, 삭제, 정보주체의 권리.' },
+    privacy: { title: '개인정보 처리방침 | Smida', description: 'Smida가 휴대폰에 저장하는 정보, 밖으로 나갈 수 있는 정보, 헬스 커넥트, 백업, 삭제, 정보주체의 권리.' },
   },
   hero: {
     story: 'smida는 스웨덴어로 ‘<em>단련하다</em>’',
