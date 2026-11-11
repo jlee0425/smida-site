@@ -10,7 +10,7 @@ export const ogLocale: Record<Locale, string> = { en: 'en_US', ja: 'ja_JP', ko: 
 type Item = { title: string; body: string };
 
 /** The home page phone: one real app capture per key (src/assets/screens/<key>.<locale>.webp). */
-export const screens = ['home', 'timer', 'quick-log', 'prbook', 'open'] as const;
+export const screens = ['home', 'timer', 'quick-log', 'prbook', 'open', 'share'] as const;
 export type Screen = (typeof screens)[number];
 type Tag = { t: string; g?: 'time' | 'amrap' | 'emom' | 'tabata' | 'rx' | 'pr' };
 type Feature = { key: Screen; kicker: string; title: string; body: string; tags: Tag[] };
@@ -138,13 +138,14 @@ const en: Dict = {
     joinNote: 'iPhone and Android · Tell us which one you use.',
     screensLabel: 'App screens',
     shots: 'Screens from the current build',
-    chips: { home: 'Home', timer: 'Timer', 'quick-log': 'Log Workout', prbook: 'PR Book', open: 'Open' },
+    chips: { home: 'Home', timer: 'Timer', 'quick-log': 'Log Workout', prbook: 'PR Book', open: 'Open', share: 'Share' },
     alt: {
-      home: 'Smida home screen: Log Workout, the weekly goal and streak, the last 12 weeks and latest PRs',
+      home: 'Smida Home: Log Workout, the week streak and this week’s workouts with their scores',
       timer: 'The AMRAP timer running, with the round counter',
-      'quick-log': 'Log Workout for Helen: movements, scale and score',
-      prbook: 'The PR Book: lifts with their best loads',
-      open: 'Open workouts grouped by year, with scores',
+      'quick-log': 'Log Workout for Fran: Thruster and Pull-Up loads, RX or scaled, and the score',
+      prbook: 'The PR Book in Profile: the best load for each lift',
+      open: 'Open workouts grouped by year, each with its format and time cap',
+      share: 'The share card editor: a Fran time on a story-size card, with a choice of styles and what to show',
     },
     features: [
       {
@@ -276,13 +277,14 @@ const ja: Dict = {
     joinNote: 'iPhone / Android · お使いの機種をひと言添えてください',
     screensLabel: 'アプリの画面',
     shots: '開発中ビルドの実際の画面',
-    chips: { home: 'ホーム', timer: 'タイマー', 'quick-log': 'ワークアウトを記録', prbook: 'PRブック', open: 'オープン' },
+    chips: { home: 'ホーム', timer: 'タイマー', 'quick-log': 'ワークアウトを記録', prbook: 'PRブック', open: 'オープン', share: 'シェア' },
     alt: {
-      home: 'Smidaのホーム画面。ワークアウトの記録ボタン、週の目標と連続記録、直近12週、最近の自己ベストが並ぶ',
+      home: 'Smidaのホーム画面。ワークアウトの記録ボタン、連続週数、今週のワークアウトとスコアが並ぶ',
       timer: 'ラウンド数をカウントしながら進むAMRAPタイマー',
-      'quick-log': 'Helenのワークアウトを記録する画面。種目、スケール、スコアを入力',
-      prbook: 'PRブック。リフトごとのベスト重量の一覧',
-      open: '年ごとにまとまったオープンのワークアウトとスコア',
+      'quick-log': 'フランを記録する画面。スラスターとプルアップの重量、RXかスケールか、スコアを入力',
+      prbook: 'プロフィールのPRブック。リフトごとのベスト重量の一覧',
+      open: '年ごとにまとまったオープンのワークアウト。形式とタイムキャップつき',
+      share: 'シェアカードの編集画面。Franのタイムをストーリーサイズのカードに。スタイルや表示する項目を選べる',
     },
     features: [
       {
@@ -413,13 +415,14 @@ const ko: Dict = {
     joinNote: 'iPhone·Android 지원 · 쓰는 기종을 한 줄 적어 주세요',
     screensLabel: '앱 화면',
     shots: '개발 중인 빌드의 실제 화면',
-    chips: { home: '홈', timer: '타이머', 'quick-log': '운동 기록', prbook: 'PR 북', open: '오픈' },
+    chips: { home: '홈', timer: '타이머', 'quick-log': '운동 기록', prbook: 'PR 북', open: '오픈', share: '공유' },
     alt: {
-      home: 'Smida 홈 화면: 운동 기록 버튼, 주간 목표와 연속 기록, 최근 12주, 최근 PR',
+      home: 'Smida 홈 화면: 운동 기록 버튼, 연속 주 기록, 이번 주 운동과 점수',
       timer: '라운드 수를 세며 돌아가는 AMRAP 타이머',
-      'quick-log': 'Helen 운동 기록 화면: 동작, 스케일, 점수 입력',
-      prbook: '리프트별 최고 무게가 정리된 PR 북',
-      open: '연도별로 묶인 오픈 와드와 점수',
+      'quick-log': 'Fran 기록 화면: Thruster와 Pull-Up 무게, RX 또는 스케일, 점수 입력',
+      prbook: '프로필의 PR 북: 리프트별 최고 무게',
+      open: '연도별로 묶인 오픈 와드, 형식과 타임캡 표시',
+      share: '공유 카드 편집 화면: Fran 기록을 스토리 크기 카드에 담고, 스타일과 보여 줄 항목을 고른다',
     },
     features: [
       {
