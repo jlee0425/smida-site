@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import TestflightQr from '../../components/TestflightQr.astro';
+import { testflight } from '../../i18n/ui';
 import { getLocale, localeStaticPaths, useT } from '../../i18n/utils';
 import '../../styles/doc.css';
 
@@ -32,6 +34,7 @@ const { support: s } = useT(getLocale(Astro.currentLocale));
           <details>
             <summary>{f.q}</summary>
             <p set:html={f.a} />
+            {f.a.includes(testflight) && <TestflightQr />}
           </details>
         ))
       }

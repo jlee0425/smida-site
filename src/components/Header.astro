@@ -1,6 +1,6 @@
 ---
 import LangSwitch from './LangSwitch.astro';
-import type { Page } from '../i18n/ui';
+import { androidBeta, testflight, type Page } from '../i18n/ui';
 import { getLocale, pathFor, useT } from '../i18n/utils';
 
 interface Props {
@@ -28,7 +28,10 @@ const links = (['features', 'about', 'support'] as const).map((p) => ({ p, href:
       }
     </nav>
     <LangSwitch page={page} />
-    <a class="btn btn-primary btn-sm max-md:!hidden" href="mailto:hello@smida.fit?subject=Smida%20beta">{t.cta.beta}</a>
+    <div class="flex items-center gap-3 max-md:!hidden">
+      <a class="btn btn-primary btn-sm whitespace-nowrap" href={testflight} rel="noopener">{t.cta.beta}</a>
+      <a class="inline-flex min-h-10 items-center whitespace-nowrap text-[13px] max-lg:!hidden text-text-secondary hover:text-text-primary" href={androidBeta}>{t.cta.android}</a>
+    </div>
   </div>
 </header>
 

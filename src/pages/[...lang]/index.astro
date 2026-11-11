@@ -3,7 +3,8 @@ import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ShareCards from '../../components/ShareCards.astro';
-import { screens } from '../../i18n/ui';
+import TestflightQr from '../../components/TestflightQr.astro';
+import { androidBeta, screens, testflight } from '../../i18n/ui';
 import { getLocale, localeStaticPaths, useT } from '../../i18n/utils';
 import icon from '../../assets/brand/s-icon.svg?url';
 import '../../styles/home.css';
@@ -16,7 +17,6 @@ const t = useT(locale);
 const h = t.home;
 const shots = import.meta.glob<{ default: ImageMetadata }>('../../assets/screens/*.webp', { eager: true });
 const shot = (key: string) => shots[`../../assets/screens/${key}.${locale}.webp`].default;
-const join = 'mailto:hello@smida.fit?subject=Smida%20beta';
 ---
 <BaseLayout page="" bare>
   <div class="wrap">
@@ -30,8 +30,9 @@ const join = 'mailto:hello@smida.fit?subject=Smida%20beta';
         <h1 class="disp" set:html={h.title} />
         <p class="lede">{h.lede}</p>
         <div class="join">
-          <a class="btn btn-primary" href={join}>{h.join}</a>
-          <p class="note">{h.joinNote}</p>
+          <a class="btn btn-primary" href={testflight} rel="noopener">{h.join}</a>
+          <p class="note">{h.joinNote} · <a href={androidBeta}>{t.cta.android}</a></p>
+          <TestflightQr />
         </div>
       </section>
 
@@ -88,8 +89,9 @@ const join = 'mailto:hello@smida.fit?subject=Smida%20beta';
       <span class="wm" aria-hidden="true">sm<span class="ki">ı</span>da</span>
       <p class="story" set:html={t.hero.story} />
       <div class="join">
-        <a class="btn btn-primary" href={join}>{h.join}</a>
-        <p class="note">{h.joinNote}</p>
+        <a class="btn btn-primary" href={testflight} rel="noopener">{h.join}</a>
+        <p class="note">{h.joinNote} · <a href={androidBeta}>{t.cta.android}</a></p>
+        <TestflightQr />
       </div>
     </div>
   </section>
