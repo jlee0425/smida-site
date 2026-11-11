@@ -5,6 +5,9 @@ export const pages = ['', 'features', 'about', 'support', 'privacy'] as const;
 export type Page = (typeof pages)[number];
 
 export const localeNames: Record<Locale, string> = { en: 'EN', ja: '日本語', ko: '한국어' };
+/** iPhone joins through the public TestFlight link; Android (Play closed testing) still needs an email. */
+export const testflight = 'https://testflight.apple.com/join/m6CQJHuQ';
+export const androidBeta = 'mailto:hello@smida.fit?subject=Smida%20beta%20Android';
 export const ogLocale: Record<Locale, string> = { en: 'en_US', ja: 'ja_JP', ko: 'ko_KR' };
 
 type Item = { title: string; body: string };
@@ -25,7 +28,7 @@ type CardText = Record<
 export interface Dict {
   a11y: { main: string; footer: string; language: string; getInvolved: string; ogAlt: string };
   nav: Record<'features' | 'about' | 'support' | 'privacy', string>;
-  cta: { follow: string; beta: string; band: string };
+  cta: { follow: string; beta: string; android: string; scan: string; band: string };
   meta: Record<Page, { title: string; description: string }>;
   hero: { story: string };
   why: { heading: string; lead: string; values: Item[] };
@@ -49,12 +52,12 @@ export interface Dict {
 const en: Dict = {
   a11y: { main: 'Main', footer: 'Footer', language: 'Language', getInvolved: 'Get involved', ogAlt: 'smida: Swedish for to forge. Functional fitness and hybrid race log.' },
   nav: { features: 'Features', about: 'About', support: 'Support', privacy: 'Privacy' },
-  cta: { follow: 'Follow @smida_fit', beta: 'Join the beta', band: 'Train with us from day one.' },
+  cta: { follow: 'Follow @smida_fit', beta: 'Join the iPhone beta', android: 'Android? Email us', scan: 'Scan with your iPhone camera', band: 'Train with us from day one.' },
   meta: {
     '': { title: 'Smida: a training log for functional fitness', description: 'A training log for functional fitness and hybrid racing: timers, benchmarks, PRs. Built at a box in Tokyo.' },
     features: { title: 'Features · Smida', description: 'What Smida does: any WOD format, strength and 1RM PRs, box timers, PR history, offline on your device, share cards. EN, JA, KO.' },
     about: { title: 'About · Smida', description: 'Smida is a training log built by a member of a box in Tokyo: local-first, no account. Smida is Swedish for to forge.' },
-    support: { title: 'Support · Smida', description: 'Smida help: the timers, how PRs count, where your data lives, backups, and how to join the beta.' },
+    support: { title: 'Support · Smida', description: 'Smida help: the timers, how PRs count, where your data lives, backups, and how to join the beta on iPhone or Android.' },
     privacy: { title: 'Privacy · Smida', description: 'What Smida keeps on your phone, what can leave it, Health Connect, backups, deletion and your rights.' },
   },
   hero: {
@@ -127,15 +130,15 @@ const en: Dict = {
       { q: 'Can I edit or delete a session?', a: 'Yes. Open the session from Home or All Activity, then tap Edit to change it, or Delete Session at the bottom to remove it.' },
       { q: 'How do I delete my account or my data?', a: "There is no account. Your data lives only on your phone and is never sent to a server, so deleting the app deletes it. To wipe it and keep the app, use Settings → Erase all data. Backup files you exported are yours: they stay wherever you saved them until you delete them." },
       { q: 'How do I back up or move my data?', a: 'Export a backup file from the app (your settings come with it) and save it wherever you like, for example your own cloud drive. Import that file on your new phone.' },
-      { q: 'How do I join the beta?', a: 'Email <a href="mailto:hello@smida.fit?subject=Smida%20beta">hello@smida.fit</a> and tell us whether you use iPhone or Android. The beta starts at our own box.' },
+      { q: 'How do I join the beta?', a: `On iPhone: install TestFlight from the App Store, then open <a href="${testflight}" rel="noopener">the beta link</a> on your iPhone and tap Accept, then Install. Updates arrive in TestFlight; each build works for 90 days, and a newer build replaces it. Send feedback to <a href="mailto:hello@smida.fit">hello@smida.fit</a>.<br />On Android: email <a href="${androidBeta}">hello@smida.fit</a> with “Android” and we’ll invite you to the test.` },
     ],
   },
   home: {
     kicker: 'Built for functional fitness',
     title: 'Forge every rep into a record.',
     lede: 'A training log for functional fitness and hybrid racing. Timers, benchmarks and PRs, all in one place.',
-    join: 'Email us to join the beta',
-    joinNote: 'iPhone and Android · Tell us which one you use.',
+    join: 'Join the iPhone beta',
+    joinNote: 'Opens in TestFlight on your iPhone.',
     screensLabel: 'App screens',
     shots: 'Screens from the current build',
     chips: { home: 'Home', timer: 'Timer', 'quick-log': 'Log Workout', prbook: 'PR Book', open: 'Open' },
@@ -187,12 +190,12 @@ const en: Dict = {
 const ja: Dict = {
   a11y: { main: 'メインメニュー', footer: 'フッターメニュー', language: '言語', getInvolved: 'ベータに参加', ogAlt: 'Smida。スウェーデン語で「鍛える」という名前の、ボックスでのトレーニングを記録するアプリ。' },
   nav: { features: '機能', about: 'Smidaのこと', support: 'サポート', privacy: 'プライバシー' },
-  cta: { follow: 'Instagramでフォロー', beta: 'ベータに参加', band: '最初のベータメンバーになりませんか。' },
+  cta: { follow: 'Instagramでフォロー', beta: 'iPhoneでベータに参加', android: 'Androidの方はメールで', scan: 'iPhoneのカメラで読み取ってください', band: '最初のベータメンバーになりませんか。' },
   meta: {
     '': { title: 'Smida｜WODと自己ベストを残すトレーニングログ', description: 'クラスのWODも、ハイブリッドレースの練習も、その場でさっと記録。タイマー、ベンチマーク、自己ベストをひとつのアプリにまとめました。東京のボックスで生まれたトレーニングログです。' },
     features: { title: '機能｜Smida', description: 'どんな形式のWODも記録でき、1RMや自己ベストの履歴、ボックスで見やすいタイマー、シェア用の記録カードまで。オフラインで動き、日本語・英語・韓国語で使えます。' },
     about: { title: 'Smidaのこと｜東京のボックス生まれのトレーニングログ', description: '東京のボックスに通うメンバーが、自分の記録のためにつくり始めたアプリです。アカウント登録はなく、データはスマホの中だけ。Smidaはスウェーデン語で「鍛える」。' },
-    support: { title: 'サポート｜Smida', description: 'タイマーの種類、自己ベストの仕組み、データの保存先とバックアップ、ベータへの参加方法。困ったときはこちらへ。' },
+    support: { title: 'サポート｜Smida', description: 'タイマーの種類、自己ベストの仕組み、データの保存先とバックアップ、iPhone・Androidのベータへの参加方法。困ったときはこちらへ。' },
     privacy: { title: 'プライバシーポリシー｜Smida', description: 'Smidaが端末に保存するもの、外に出ることがあるもの、ヘルスコネクト、バックアップ、削除、ご本人の権利について。' },
   },
   hero: {
@@ -265,15 +268,15 @@ const ja: Dict = {
       { q: 'セッションを編集・削除するには？', a: 'ホームか「すべてのアクティビティ」からセッションを開き、「編集」で修正できます。消したいときは、画面のいちばん下にある「セッションを削除」から。' },
       { q: 'アカウントやデータを削除したい', a: 'Smidaにはアカウントがありません。データはスマホの中にしかなく、どこかのサーバーに送られることもないので、アプリを削除すればデータも一緒に消えます。アプリは残してデータだけ消したいときは、設定の「すべてのデータを消去」から。書き出したバックアップファイルはご自身で保存したものなので、不要になったらそのファイルを削除してください。' },
       { q: 'バックアップや機種変更は？', a: 'アプリからバックアップファイル（設定も含みます）を書き出して、好きな場所（自分のクラウドストレージなど）に保存しておきます。新しいスマホでそのファイルを読み込めば、元どおりです。' },
-      { q: 'ベータに参加するには？', a: '<a href="mailto:hello@smida.fit?subject=Smida%20beta">hello@smida.fit</a> に、iPhoneとAndroidのどちらを使っているかを書いて送ってください。ベータは、まず開発者が通うボックスから始めています。' },
+      { q: 'ベータに参加するには？', a: `iPhoneの場合：App Storeから「TestFlight」をインストールし、iPhoneで<a href="${testflight}" rel="noopener">ベータ用リンク</a>を開いて「同意する」、続けて「インストール」をタップしてください。アップデートはTestFlightに届きます。各ビルドは90日間使え、新しいビルドに順次置き換わります。ご意見・ご感想は<a href="mailto:hello@smida.fit">hello@smida.fit</a>まで。<br />Androidの場合：<a href="${androidBeta}">hello@smida.fit</a>に「Android」と書いて送ってください。テストにご招待します。` },
     ],
   },
   home: {
     kicker: 'ボックスで汗を流す人へ',
     title: '鍛えた分だけ、<br>記録は積み上がる。',
     lede: 'クラスのWODも、ハイブリッドレースの練習も。タイマー、ベンチマーク、自己ベストをひとつのアプリにまとめました。',
-    join: 'メールでベータに申し込む',
-    joinNote: 'iPhone / Android · お使いの機種をひと言添えてください',
+    join: 'iPhoneでベータに参加',
+    joinNote: 'iPhoneのTestFlightで開きます',
     screensLabel: 'アプリの画面',
     shots: '開発中ビルドの実際の画面',
     chips: { home: 'ホーム', timer: 'タイマー', 'quick-log': 'ワークアウトを記録', prbook: 'PRブック', open: 'オープン' },
@@ -324,12 +327,12 @@ const ja: Dict = {
 const ko: Dict = {
   a11y: { main: '주 메뉴', footer: '하단 메뉴', language: '언어', getInvolved: '베타 신청', ogAlt: 'Smida. 스웨덴어로 ‘단련하다’라는 이름의, 박스 운동을 기록하는 앱.' },
   nav: { features: '기능', about: '소개', support: '도움말', privacy: '개인정보 처리방침' },
-  cta: { follow: '인스타그램 팔로우', beta: '베타 신청', band: '첫 베타 멤버가 되어 주세요.' },
+  cta: { follow: '인스타그램 팔로우', beta: 'iPhone 베타 참여', android: 'Android는 메일로 신청', scan: 'iPhone 카메라로 스캔하세요', band: '첫 베타 멤버가 되어 주세요.' },
   meta: {
     '': { title: 'Smida | 와드와 PR을 남기는 운동 기록 앱', description: '수업 와드부터 하이브리드 레이스 훈련까지, 운동 끝나고 바로 기록하세요. 타이머, 벤치마크, PR 관리를 앱 하나에 담았습니다. 도쿄의 한 박스에서 태어난 운동 기록 앱입니다.' },
     features: { title: '기능 | Smida', description: '어떤 형식의 와드든 기록하고, 1RM과 PR 히스토리, 박스에서 잘 보이는 타이머, 공유용 기록 카드까지. 인터넷 없이 작동하고 한국어·일본어·영어를 지원합니다.' },
     about: { title: '소개 | Smida', description: '도쿄의 한 박스 회원이 자기 기록을 남기려고 만들기 시작한 앱입니다. 가입 없이 쓰고, 데이터는 휴대폰에만 남습니다. Smida는 스웨덴어로 ‘단련하다’라는 뜻입니다.' },
-    support: { title: '도움말 | Smida', description: '타이머 종류, PR이 잡히는 기준, 데이터 저장 위치와 백업, 베타 신청 방법까지. 궁금한 점은 여기서 확인하세요.' },
+    support: { title: '도움말 | Smida', description: '타이머 종류, PR이 잡히는 기준, 데이터 저장 위치와 백업, iPhone·Android 베타 신청 방법까지. 궁금한 점은 여기서 확인하세요.' },
     privacy: { title: '개인정보 처리방침 | Smida', description: 'Smida가 휴대폰에 저장하는 정보, 밖으로 나갈 수 있는 정보, 헬스 커넥트, 백업, 삭제, 정보주체의 권리.' },
   },
   hero: {
@@ -402,15 +405,15 @@ const ko: Dict = {
       { q: '세션을 수정하거나 지우려면요?', a: '홈이나 ‘전체 활동’에서 세션을 열고 ‘편집’을 누르면 수정할 수 있습니다. 지우려면 화면 맨 아래 ‘세션 삭제’를 누르세요.' },
       { q: '계정이나 데이터는 어떻게 삭제하나요?', a: 'Smida에는 계정이 없습니다. 데이터는 휴대폰 안에만 있고 어떤 서버로도 전송되지 않기 때문에, 앱을 삭제하면 데이터도 함께 지워집니다. 앱은 두고 데이터만 지우려면 설정의 ‘모든 데이터 삭제’를 쓰세요. 내보낸 백업 파일은 직접 저장해 둔 파일이니, 필요 없다면 그 파일을 지우면 됩니다.' },
       { q: '백업이나 기기 변경은 어떻게 하나요?', a: '앱에서 백업 파일(설정 포함)을 내보내 원하는 곳(내 클라우드 드라이브 등)에 보관하세요. 새 휴대폰에서 그 파일을 가져오면 그대로 복원됩니다.' },
-      { q: '베타는 어떻게 신청하나요?', a: '<a href="mailto:hello@smida.fit?subject=Smida%20beta">hello@smida.fit</a>으로 iPhone과 Android 중 어떤 기기를 쓰는지 적어서 메일 주세요. 베타는 개발자가 다니는 박스에서 먼저 시작합니다.' },
+      { q: '베타는 어떻게 신청하나요?', a: `iPhone: App Store에서 TestFlight를 설치한 뒤, iPhone에서 <a href="${testflight}" rel="noopener">베타 링크</a>를 열고 ‘수락’, ‘설치’ 순서로 누르세요. 업데이트는 TestFlight로 받을 수 있어요. 빌드마다 90일 동안 쓸 수 있고, 새 빌드가 나오면 그 빌드로 바뀝니다. 의견은 <a href="mailto:hello@smida.fit">hello@smida.fit</a>으로 보내 주세요.<br />Android: <a href="${androidBeta}">hello@smida.fit</a>으로 ‘Android’라고 적어 메일 주시면 테스트에 초대해 드려요.` },
     ],
   },
   home: {
     kicker: '박스에서 운동하는 사람을 위해',
     title: '단련한 만큼, 기록이 쌓인다.',
     lede: '수업 와드부터 하이브리드 레이스 훈련까지. 타이머, 벤치마크, PR을 앱 하나에 담았습니다.',
-    join: '메일로 베타 신청하기',
-    joinNote: 'iPhone·Android 지원 · 쓰는 기종을 한 줄 적어 주세요',
+    join: 'iPhone 베타 참여하기',
+    joinNote: 'iPhone의 TestFlight에서 열려요',
     screensLabel: '앱 화면',
     shots: '개발 중인 빌드의 실제 화면',
     chips: { home: '홈', timer: '타이머', 'quick-log': '운동 기록', prbook: 'PR 북', open: '오픈' },
