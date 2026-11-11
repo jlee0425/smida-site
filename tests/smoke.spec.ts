@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { locales, pages, screens } from '../src/i18n/ui';
+import { androidBeta, locales, pages, screens, testflight } from '../src/i18n/ui';
 import { pathFor } from '../src/i18n/utils';
 
 for (const page of pages) {
@@ -47,13 +47,30 @@ for (const locale of locales) {
   });
 }
 
-test('home: the beta CTA is a mailto and nothing collects an email address', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('form, input')).toHaveCount(0);
-  const ctas = page.locator('main a.btn');
-  await expect(ctas).toHaveCount(2);
-  for (const href of await ctas.evaluateAll((as) => as.map((a) => a.getAttribute('href')))) {
-    expect(href).toBe('mailto:hello@smida.fit?subject=Smida%20beta');
+for (const locale of locales) {
+  test(`home: the beta CTA is the TestFlight link, Android mails, nothing collects an email (${locale})`, async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem('smida-lang', 'en'));
+    await page.goto(pathFor(locale, ''));
+    await expect(page.locator('form, input')).toHaveCount(0);
+    const ctas = page.locator('main a.btn');
+    await expect(ctas).toHaveCount(2);
+    for (const cta of await ctas.all()) {
+      await expect(cta).toHaveAttribute('href', testflight);
+      await expect(cta).toHaveAttribute('rel', 'noopener');
+    }
+    await expect(page.locator(`main .note a[href="${androidBeta}"]`)).toHaveCount(2);
+  });
+}
+
+test('the TestFlight QR shows on desktop and hides on a phone (home + support)', async ({ page }) => {
+  for (const path of ['/', '/support/']) {
+    await page.setViewportSize({ width: 1200, height: 800 });
+    await page.goto(path);
+    await expect(page.locator('main figure.qr').first()).toBeAttached();
+    if (path === '/support/') await page.locator('.faq details', { has: page.locator('figure.qr') }).locator('summary').click();
+    await expect(page.locator('main figure.qr').first()).toBeVisible();
+    await page.setViewportSize({ width: 390, height: 844 });
+    for (const qr of await page.locator('main figure.qr').all()) await expect(qr).toBeHidden();
   }
 });
 
@@ -121,9 +138,10 @@ for (const locale of locales) {
     await expect(faq).toHaveCount(7);
     await faq.first().locator('summary').click();
     await expect(faq.first().locator('p')).toBeVisible();
-    // The header button is the beta mailto, not a waitlist.
+    // The header button is the iPhone TestFlight link, with the Android mailto beside it; no waitlist.
     await page.setViewportSize({ width: 1200, height: 800 });
-    await expect(page.locator('header a.btn')).toHaveAttribute('href', 'mailto:hello@smida.fit?subject=Smida%20beta');
+    await expect(page.locator('header a.btn')).toHaveAttribute('href', testflight);
+    await expect(page.locator(`header a[href="${androidBeta}"]`)).toBeVisible();
   });
 }
 
